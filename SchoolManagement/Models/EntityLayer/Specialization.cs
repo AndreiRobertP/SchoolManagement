@@ -18,6 +18,5 @@ namespace SchoolManagement.Models.EntityLayer
 
         [Required]
         public bool IsActive { get; set; } = true;
-
     }
 }

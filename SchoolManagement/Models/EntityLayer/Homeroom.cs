@@ -14,17 +14,17 @@ namespace SchoolManagement.Models.EntityLayer
         public int HomeroomId { get; set; }
 
         [Required]
-        public int SpecializationId { get; set; }
-
-        public int? HomeroomTeacherId { get; set; }
-
-        [Required]
-        public String NameHomeroom { get; set; } = "NewClass";
+        public string NameHomeroom { get; set; } = "NewClass";
 
         [Required]
         public int Year { get; set; }
 
         [Required]
         public bool IsActive { get; set; }
+
+
+        //Relations
+        public Teacher Teacher { get; set; } = null!;
+        public Specialization Specialization { get; set; } = null!;
     }
 }

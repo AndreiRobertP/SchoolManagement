@@ -13,15 +13,11 @@ namespace SchoolManagement.Models.EntityLayer
         public int ShtId { get; set; }
 
         [Required]
-        public int SubjectId { get; set; }
-
-        [Required]
-        public int HomeroomId { get; set; }
-
-        [Required]
-        public int TeacherId { get; set; }
-
-        [Required]
         public int HasThesis { get; set; }
+
+        //Relations
+        public Subject Subject { get; set; } = null!;
+        public Homeroom Homeroom { get; set; } = null!;
+        public Teacher Teacher { get; set; } = null!;
     }
 }
