@@ -14,6 +14,8 @@ namespace SchoolManagement.Models.EntityLayer
 
         [Required]
         public int HasThesis { get; set; }
+        [Required]
+        public bool IsActive { get; set; } = true;
 
         //Relations
         public Subject Subject { get; set; } = null!;

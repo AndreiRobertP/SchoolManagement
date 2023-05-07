@@ -25,7 +25,31 @@ namespace SchoolManagement
         {
             InitializeComponent();
 
-            frmMain.Content = new ManageCSTView();
+            frmMain.Content = new LoginView();
+        }
+
+        public void SetVisibilityMenuRoles(bool visibility) {
+            MnuUserRolesMenu.Visibility = visibility == true ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public void SetVisibilityAdmin(bool visibility)
+        {
+            MnuAdmin.Visibility = visibility == true ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public void SetVisibilityTeacher(bool visibility)
+        {
+            MnuTeacher.Visibility = visibility == true ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public void SetVisibilityHomeroomTeacher(bool visibility)
+        {
+            MnuHomeroomTeacher.Visibility = visibility == true ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public void SetVisibilityStudent(bool visibility)
+        {
+            MnuStudent.Visibility = visibility == true ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

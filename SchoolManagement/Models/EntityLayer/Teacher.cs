@@ -17,7 +17,7 @@ namespace SchoolManagement.Models.EntityLayer
         public string? LastName { get; set; }
         
         [Required]
-        public bool IsActive { get; set; } = false;
+        public bool IsActive { get; set; } = true;
 
         public Homeroom? Homeroom { get; set; }
     }

@@ -3,10 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SchoolManagement.Views"
+      xmlns:local="clr-namespace:SchoolManagement.Views" xmlns:ViewModels="clr-namespace:SchoolManagement.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginView">
+
+    <Page.DataContext>
+        <ViewModels:LoginVM/>
+    </Page.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -33,14 +37,14 @@
                 </Grid.RowDefinitions>
 
                 <Label Margin="10, 20, 10, 0" Grid.Row="0" FontWeight="Black" FontSize="15">Login</Label>
-                
+
                 <Label Margin="10,5,10,0" Grid.Row="1" VerticalAlignment="Bottom">Enter username</Label>
-                <TextBox Margin="10,0" Grid.Row="2"></TextBox>
+                <TextBox Margin="10,0" Grid.Row="2" Text="{Binding DisplayUsername}"></TextBox>
 
                 <Label Margin="10,5,10,0" Grid.Row="3" VerticalAlignment="Bottom">Enter password</Label>
-                <PasswordBox Margin="10,0" Grid.Row="4"></PasswordBox>
+                <PasswordBox Margin="10,0" Grid.Row="4" PasswordChar="{Binding DisplayPassword}"></PasswordBox>
 
-                <Button Grid.Row="5" Margin="10, 20" Background="#89bda4">Login</Button>
+                <Button Grid.Row="5" Margin="10, 20" Background="#89bda4" Command="{Binding CmdLogin}">Login</Button>
             </Grid>
         </Grid>
 

@@ -22,7 +22,7 @@ namespace SchoolManagement.Models.EntityLayer
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         [Required]
-        public bool IsActive { get; set; } = false;
+        public bool IsActive { get; set; } = true;
 
     }
 }

@@ -20,10 +20,13 @@ namespace SchoolManagement.Models.EntityLayer
         public int Year { get; set; }
 
         [Required]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
 
         //Relations
+        [Required]
+        public int TeacherId { get; set; }
+        [Required]
         public Teacher Teacher { get; set; } = null!;
         public Specialization Specialization { get; set; } = null!;
     }

@@ -3,27 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SchoolManagement"
+        xmlns:local="clr-namespace:SchoolManagement" xmlns:ViewModels="clr-namespace:SchoolManagement.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <DockPanel>
-        <Menu Name="MnuUserRolesMenu" DockPanel.Dock="Top">
-            <MenuItem Header="Admin">
+    <Window.DataContext>
+        <ViewModels:MainWindowVM/>
+    </Window.DataContext>
+
+        <DockPanel>
+        <Menu Name="MnuUserRolesMenu" DockPanel.Dock="Top" Visibility="Collapsed">
+            <MenuItem Name="MnuAdmin" Header="Admin" Visibility="Collapsed">
                 <MenuItem Header="Gestiune specializari"/>
                 <MenuItem Header="Gestiune profesori"/>
                 <MenuItem Header="Gestiune materii"/>
                 <MenuItem Header="Gestiune clase"/>
                 <MenuItem Header="Gestiune elevi"/>
             </MenuItem>
-            <MenuItem Header="Profesor">
+            <MenuItem Name="MnuTeacher" Header="Profesor" Visibility="Collapsed">
                 <MenuItem Header="Catalog"/>
             </MenuItem>
-            <MenuItem Header="Diriginte">
+            <MenuItem Name="MnuHomeroomTeacher" Header="Diriginte" Visibility="Collapsed">
                 <MenuItem Header="Catalog clasa"></MenuItem>
                 <MenuItem Header="Statistici"></MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Elev"/>
+            <MenuItem Name="MnuStudent" Header="Elev" Visibility="Collapsed"/>
         </Menu>
 
         <Frame Name="frmMain"></Frame>
