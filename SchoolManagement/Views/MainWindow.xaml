@@ -1,0 +1,31 @@
+﻿<Window x:Class="SchoolManagement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SchoolManagement"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <Menu Name="MnuUserRolesMenu" DockPanel.Dock="Top">
+            <MenuItem Header="Admin">
+                <MenuItem Header="Gestiune specializari"/>
+                <MenuItem Header="Gestiune profesori"/>
+                <MenuItem Header="Gestiune materii"/>
+                <MenuItem Header="Gestiune clase"/>
+                <MenuItem Header="Gestiune elevi"/>
+            </MenuItem>
+            <MenuItem Header="Profesor">
+                <MenuItem Header="Catalog"/>
+            </MenuItem>
+            <MenuItem Header="Diriginte">
+                <MenuItem Header="Catalog clasa"></MenuItem>
+                <MenuItem Header="Statistici"></MenuItem>
+            </MenuItem>
+
+            <MenuItem Header="Elev"/>
+        </Menu>
+
+        <Frame Name="frmMain"></Frame>
+    </DockPanel>
+</Window>

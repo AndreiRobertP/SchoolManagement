@@ -1,0 +1,79 @@
+﻿<Page x:Class="SchoolManagement.Views.HomeroomTeacherCatalogView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SchoolManagement.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomeroomTeacherCatalogView">
+
+
+    <Grid Background="white" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Alegere elev -->
+        <DataGrid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nr" Width="auto"/>
+                <DataGridTextColumn Header="Nume elev" Width="*"/>
+                <DataGridTextColumn Header="Medie" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Alegere meterie -->
+        <DataGrid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Materie" Width="*"/>
+                <DataGridTextColumn Header="Medie" Width="auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
+        <!-- Note -->
+        <DataGrid Grid.Row="0" Grid.Column="2" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nr" Width="auto"/>
+                <DataGridTextColumn Header="Nota" Width="*"/>
+                <DataGridTextColumn Header="Data" Width="*"/>
+                <DataGridTextColumn Header="Teza" Width="auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Absente -->
+        <Grid Margin="5" Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Menu Grid.Row="0">
+                <MenuItem Header="Motiveaza"></MenuItem>
+            </Menu>
+
+            <DataGrid Grid.Row="1" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nr" Width="auto"/>
+                    <DataGridTextColumn Header="Data" Width="*"/>
+                    <DataGridTextColumn Header="Status" Width="auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Status -->
+        <Menu IsEnabled="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" >
+            <Label>Status : Neincheiat [se poate incheia]</Label>
+            <Label>Medie: 8.50</Label>
+        </Menu>
+    </Grid>
+</Page>
