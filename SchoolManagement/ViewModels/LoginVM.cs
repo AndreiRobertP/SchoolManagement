@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
-using Microsoft.Identity.Client;
+﻿using Microsoft.Identity.Client;
 using SchoolManagement.Models.BusinessLogic;
 using System;
 using System.Collections.Generic;

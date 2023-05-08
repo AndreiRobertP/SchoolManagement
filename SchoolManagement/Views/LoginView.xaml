@@ -42,7 +42,7 @@
                 <TextBox Margin="10,0" Grid.Row="2" Text="{Binding DisplayUsername}"></TextBox>
 
                 <Label Margin="10,5,10,0" Grid.Row="3" VerticalAlignment="Bottom">Enter password</Label>
-                <PasswordBox Margin="10,0" Grid.Row="4" PasswordChar="{Binding DisplayPassword}"></PasswordBox>
+                <PasswordBox Margin="10,0" Grid.Row="4"></PasswordBox>
 
                 <Button Grid.Row="5" Margin="10, 20" Background="#89bda4" Command="{Binding CmdLogin}">Login</Button>
             </Grid>

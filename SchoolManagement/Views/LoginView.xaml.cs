@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using SchoolManagement.Models.BusinessLogic;
+using SchoolManagement.ViewModels;
 
 namespace SchoolManagement.Views
 {
@@ -23,9 +24,11 @@ namespace SchoolManagement.Views
     /// </summary>
     public partial class LoginView : Page
     {
+        public LoginVM LoginVM{get; set;}
         public LoginView()
         {
             InitializeComponent();
+            LoginVM = DataContext as LoginVM;
 
             Uri uri = new Uri("https://images.pexels.com/photos/5088017/pexels-photo-5088017.jpeg", UriKind.Absolute);
             BitmapImage img = new BitmapImage(uri);
