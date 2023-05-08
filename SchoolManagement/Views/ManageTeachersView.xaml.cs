@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SchoolManagement.Models.EntityLayer;
+using SchoolManagement.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,17 @@ namespace SchoolManagement.Views
     /// </summary>
     public partial class ManageTeachersView : Page
     {
+        public ManageTeachersVM ManageTeachersVM { get; set; }
         public ManageTeachersView()
         {
             InitializeComponent();
+
+            ManageTeachersVM = (DataContext as ManageTeachersVM);
+        }
+
+        private void DtgTeachers_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            ManageTeachersVM.SelectedTeacher = (Teacher)DtgTeachers.SelectedItem;
         }
     }
 }

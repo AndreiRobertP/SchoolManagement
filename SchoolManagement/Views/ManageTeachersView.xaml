@@ -3,22 +3,25 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SchoolManagement.Views"
+      xmlns:local="clr-namespace:SchoolManagement.Views" xmlns:ViewModels="clr-namespace:SchoolManagement.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManageTeachersView">
 
+    <Page.DataContext>
+        <ViewModels:ManageTeachersVM/>
+    </Page.DataContext>
+    
     <Grid Background="White" Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*" MaxWidth="350"/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Column="0" AutoGenerateColumns="False" Margin="5">\
+        <DataGrid Name="DtgTeachers" Grid.Column="0" AutoGenerateColumns="False" Margin="5" ItemsSource="{Binding Teachers}" IsReadOnly="true" SelectedItem="{Binding SelectedTeacher}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Username" Width="*"/>
-                <DataGridTextColumn Header="Nume" Width="*"/>
-                <DataGridTextColumn Header="Prenume" Width="*"/>
+                <DataGridTextColumn Header="Username" Width="*" Binding="{Binding Username}"/>
+                <DataGridTextColumn Header="Nume" Width="*" Binding="{Binding Name}"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -28,24 +31,20 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Content="Username" Margin="5,20,5,0"/>
-            <TextBox Grid.Row="1" Margin="5,0"/>
+            <TextBox Grid.Row="1" Margin="5,0" Text="{Binding FieldUsername, Mode=TwoWay}" />
             <Label Grid.Row="2" Content="Nume" Margin="5,0"/>
-            <TextBox Grid.Row="3" Margin="5,0"/>
-            <Label Grid.Row="4" Content="Prenume" Margin="5,0"/>
-            <TextBox Grid.Row="5" Margin="5,0"/>
+            <TextBox Grid.Row="3" Margin="5,0" Text="{Binding FieldName, Mode=TwoWay}" />
 
-            <Menu Background="#ced4da" Grid.Row="7">
-                <MenuItem Header="Adaugare"/>
-                <MenuItem Header="Dezactivare"/>
-                <MenuItem Header="Modificare"/>
-            </Menu>
+            <WrapPanel Background="#ced4da" Grid.Row="7">
+                <Button Content="Adaugare" Command="{Binding CmdAdd}"/>
+                <Button Content="Dezactivare" Command="{Binding CmdDelete}"/>
+                <Button Content="Modificare" Command="{Binding CmdEdit}"/>
+            </WrapPanel>
         </Grid>
     </Grid>
 </Page>

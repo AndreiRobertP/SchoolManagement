@@ -27,7 +27,7 @@ namespace SchoolManagement.Models.BusinessLogic
             {
                 var adminResponse = context.Admins.Where(a => a.Username == username && a.IsActive == true).ToArray<Admin>();
 
-                var teacherResponse = context.Teachers.Where(t => t.Username == username && t.IsActive == true).Include(t => t.Homeroom).ToArray<Teacher>();
+                var teacherResponse = context.Teachers.Where(t => t.Username == username && t.IsActive == true).ToArray<Teacher>();
 
                 var studentResponse = context.Students.Where(s => s.Username == username && s.IsActive == true).ToArray<Student>();
 
@@ -35,7 +35,7 @@ namespace SchoolManagement.Models.BusinessLogic
                 {
                     IsAdmin = adminResponse.Length > 0,
                     IsTeacher = teacherResponse.Length > 0,
-                    IsHomeroomTeacher = teacherResponse.Length > 0 && teacherResponse[0].Homeroom != null,
+                    IsHomeroomTeacher = teacherResponse.Length > 0, //TODO FIXME
                     IsStudent = studentResponse.Length > 0
                 };
             }

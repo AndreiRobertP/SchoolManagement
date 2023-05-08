@@ -45,11 +45,5 @@ namespace SchoolManagement.Models.EntityLayer
                 OnPropertyChanged();
             }
         }
-
-        public void TransferCopyTo(Teacher destination)
-        {
-            destination.Username = (string)Username.Clone();
-            destination.Name = (string)Name.Clone();
-        }
     }
 }
