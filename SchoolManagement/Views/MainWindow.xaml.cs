@@ -1,6 +1,9 @@
-﻿using SchoolManagement.Views;
+﻿using SchoolManagement.Models.BusinessLogic;
+using SchoolManagement.ViewModels;
+using SchoolManagement.Views;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +24,32 @@ namespace SchoolManagement
     /// </summary>
     public partial class MainWindow : Window
     {
+        //VMs
+        public LoginVM LoginVM { get; set; }
+        public MainWindowView MainWindowViewModel { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            MainWindowViewModel = DataContext as MainWindowView;
 
-            frmMain.Content = new LoginView();
+            var loginView = new LoginView();
+            frmMain.Content = loginView;
+
+            LoginVM = loginView.LoginVM;
+            LoginVM.PropertyChanged += OnLoginChange;
+        }
+
+        void OnLoginChange(object sender, PropertyChangedEventArgs e) {
+            if (e.PropertyName == nameof(LoginVM.UserPermisions)) {
+                UserPermisions userPermisions = LoginVM.UserPermisions;
+
+                SetVisibilityMenuRoles(userPermisions.IsRegistered);
+                SetVisibilityAdmin(userPermisions.IsAdmin);
+                SetVisibilityTeacher(userPermisions.IsTeacher);
+                SetVisibilityHomeroomTeacher(userPermisions.IsHomeroomTeacher);
+                SetVisibilityStudent(userPermisions.IsStudent);
+            }
         }
 
         public void SetVisibilityMenuRoles(bool visibility) {
@@ -50,6 +74,11 @@ namespace SchoolManagement
         public void SetVisibilityStudent(bool visibility)
         {
             MnuStudent.Visibility = visibility == true ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void MniManageTeachers_Click(object sender, RoutedEventArgs e)
+        {
+            frmMain.Content = new ManageTeachersView();
         }
     }
 }

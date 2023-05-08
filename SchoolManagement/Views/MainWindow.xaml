@@ -6,15 +6,16 @@
         xmlns:local="clr-namespace:SchoolManagement" xmlns:ViewModels="clr-namespace:SchoolManagement.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
     <Window.DataContext>
         <ViewModels:MainWindowVM/>
     </Window.DataContext>
 
-        <DockPanel>
+    <DockPanel>
         <Menu Name="MnuUserRolesMenu" DockPanel.Dock="Top" Visibility="Collapsed">
             <MenuItem Name="MnuAdmin" Header="Admin" Visibility="Collapsed">
                 <MenuItem Header="Gestiune specializari"/>
-                <MenuItem Header="Gestiune profesori"/>
+                <MenuItem Header="Gestiune profesori" Name="MniManageTeachers" Click="MniManageTeachers_Click"/>
                 <MenuItem Header="Gestiune materii"/>
                 <MenuItem Header="Gestiune clase"/>
                 <MenuItem Header="Gestiune elevi"/>
