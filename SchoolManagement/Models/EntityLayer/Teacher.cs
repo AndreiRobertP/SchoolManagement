@@ -7,43 +7,17 @@ namespace SchoolManagement.Models.EntityLayer
 {
     public class Teacher : BasePropertyChanged
     {
+        private int _teacherId;
         [Key]
-        public int Id { get; set; }
+        public int TeacherId { get { return _teacherId; } set { _teacherId = value; OnPropertyChanged(); } }
 
         private string _username = "";
-        [Required]
-        public string Username
-        {
-            get => _username;
-            set
-            {
-                _username = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Username { get { return _username; } set { _username = value; OnPropertyChanged(); } }
 
         private string _name = "";
-        [Required]
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Name { get { return _name; } set { _name = value; OnPropertyChanged(); } }
 
         private bool _isActive = true;
-        [Required]
-        public bool IsActive
-        {
-            get => _isActive;
-            set
-            {
-                _isActive = value;
-                OnPropertyChanged();
-            }
-        }
+        public bool IsActive { get { return _isActive; } set { _isActive = value; OnPropertyChanged(); } }
     }
 }

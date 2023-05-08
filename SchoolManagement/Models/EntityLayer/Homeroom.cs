@@ -1,33 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SchoolManagement.ViewModels;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Models.EntityLayer
 {
-    public class Homeroom
+    public class Homeroom : BasePropertyChanged
     {
+        int _homeroomId;
         [Key]
-        public int HomeroomId { get; set; }
+        public int HomeroomId { get { return _homeroomId; } set { _homeroomId = value; OnPropertyChanged(); } }
 
-        [Required]
-        public string NameHomeroom { get; set; } = "NewClass";
+        private string _nameHomeroom = "NewClass";
+        public string NameHomeroom { get { return _nameHomeroom; } set { _nameHomeroom = value; OnPropertyChanged(); } }
 
-        [Required]
-        public int Year { get; set; }
+        private int _year = 0;
+        public int Year { get { return _year; } set { _year = value; OnPropertyChanged(); } }
 
-        [Required]
-        public bool IsActive { get; set; } = true;
-
+        private bool _isActive = true;
+        public bool IsActive { get { return _isActive; } set { _isActive = value; OnPropertyChanged(); } }
 
         //Relations
-        [Required]
-        public int TeacherId { get; set; }
-        [Required]
-        public Teacher Teacher { get; set; } = null!;
-        public Specialization Specialization { get; set; } = null!;
+        private int _teacherId = -1;
+        public int TeacherId { get { return _teacherId; } set { _teacherId = value; OnPropertyChanged(); } }
+
+        private Teacher _teacher = null!;
+        public Teacher Teacher { get { return _teacher; } set { _teacher = value; OnPropertyChanged(); } }
+
+        private int _specializationId = -1;
+        public int SpecializationId { get { return _specializationId; } set { _specializationId = value; OnPropertyChanged(); } }
+
+        private Specialization _specialization = null!;
+        public Specialization Specialization { get { return _specialization; } set { _specialization = value; OnPropertyChanged(); } }
     }
 }

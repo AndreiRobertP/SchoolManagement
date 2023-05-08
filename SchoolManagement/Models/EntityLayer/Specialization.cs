@@ -1,22 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using SchoolManagement.ViewModels;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Models.EntityLayer
 {
-    public class Specialization
+    public class Specialization: BasePropertyChanged
     {
+        private int _SpecializationId;
         [Key]
-        public int SpecializationId { get; set; }
-        
-        [Required]
-        public string NameSpecialization { get; set; } = "NewSubject";
+        public int SpecializationId { get { return _SpecializationId; } set { _SpecializationId = value; OnPropertyChanged(); } }
 
-        [Required]
-        public bool IsActive { get; set; } = true;
+        private string _nameSpecialization = "";
+        public string NameSpecialization { get { return _nameSpecialization; } set { _nameSpecialization = value; OnPropertyChanged(); } }
+
+        private bool _isActive = true;
+        public bool IsActive { get { return _isActive; } set { _isActive = value; OnPropertyChanged(); } }
     }
 }

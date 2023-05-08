@@ -127,7 +127,7 @@ namespace SchoolManagement.ViewModels
 
                         foreach (var teacher in Teachers)
                         {
-                            if (teacher.Username == FieldName && teacher.Id != SelectedTeacher.Id)
+                            if (teacher.Username == FieldName && teacher.TeacherId != SelectedTeacher.TeacherId)
                             {
                                 MessageBox.Show("Exista username");
                                 return;

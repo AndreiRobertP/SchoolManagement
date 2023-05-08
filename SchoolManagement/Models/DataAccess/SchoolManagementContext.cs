@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Models.EntityLayer;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Models.DataAccess
 {
@@ -35,6 +30,16 @@ namespace SchoolManagement.Models.DataAccess
 
         public DbSet<Homeroom> Homerooms { get; set; }
         public DbSet<Sht> Shts { get; set; }
+
+
+        // ============
+        // SHT DEPENDENT
+        // ============
+
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Absence> Absences { get; set; }
+        public DbSet<Mean> Means { get; set; }
+        public DbSet<File> Files { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

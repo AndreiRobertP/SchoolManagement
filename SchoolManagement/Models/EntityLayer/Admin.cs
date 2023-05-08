@@ -1,28 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using SchoolManagement.ViewModels;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Models.EntityLayer
 {
-    public class Admin
+    public class Admin : BasePropertyChanged
     {
         // =====================
         // Basic props for user
         // =====================
 
+        private int _id;
         [Key]
-        public int Id { get; set; }
-        [Required]
-        public string Username { get; set; } = "NewTeacher";
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        [Required]
-        public bool IsActive { get; set; } = true;
+        public int Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }
+
+        private string _username = "NewTeacher";
+        public string Username { get { return _username; } set { _username = value; OnPropertyChanged(); } }
+
+        private string _name = "";
+        public string Name { get { return _name; } set { _name = value; OnPropertyChanged(); } }
+
+        private bool _isActive = true;
+        public bool IsActive { get { return _isActive; } set { _isActive = value; OnPropertyChanged(); } }
 
     }
 }
