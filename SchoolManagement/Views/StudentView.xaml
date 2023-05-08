@@ -37,9 +37,9 @@
             </Grid.RowDefinitions>
 
             <Menu Grid.Row="0">
-                <MenuItem Header="Adauga"/>
-                <MenuItem Header="Sterge"/>
-                <MenuItem Header="Descarca"/>
+                <Button Content="Adauga"/>
+                <Button Content="Sterge"/>
+                <Button Content="Descarca"/>
             </Menu>
             <DataGrid Grid.Row="1" AutoGenerateColumns="False">
                 <DataGrid.Columns>

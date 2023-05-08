@@ -31,11 +31,11 @@
             <Label Grid.Row="0" Content="Specializare" Margin="5,20,5,0"/>
             <TextBox Grid.Row="1" Margin="5,0"/>
 
-            <Menu Background="#ced4da" Grid.Row="5">
-                <MenuItem Header="Adaugare"/>
-                <MenuItem Header="Dezactivare"/>
-                <MenuItem Header="Modificare"/>
-            </Menu>
+            <WrapPanel Background="#ced4da" Grid.Row="5">
+                <Button Content="Adaugare"/>
+                <Button Content="Dezactivare"/>
+                <Button Content="Modificare"/>
+            </WrapPanel>
         </Grid>
     </Grid>
 </Page>

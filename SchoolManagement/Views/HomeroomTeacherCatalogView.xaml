@@ -58,7 +58,7 @@
             </Grid.RowDefinitions>
 
             <Menu Grid.Row="0">
-                <MenuItem Header="Motiveaza"></MenuItem>
+                <Button Content="Motiveaza"></Button>
             </Menu>
 
             <DataGrid Grid.Row="1" AutoGenerateColumns="False">

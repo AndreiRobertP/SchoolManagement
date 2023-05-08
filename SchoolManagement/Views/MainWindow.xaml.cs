@@ -26,12 +26,12 @@ namespace SchoolManagement
     {
         //VMs
         public LoginVM LoginVM { get; set; }
-        public MainWindowView MainWindowViewModel { get; set; }
+        public MainWindowVM MainWindowViewModel { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            MainWindowViewModel = DataContext as MainWindowView;
+            MainWindowViewModel = DataContext as MainWindowVM;
 
             var loginView = new LoginView();
             frmMain.Content = loginView;

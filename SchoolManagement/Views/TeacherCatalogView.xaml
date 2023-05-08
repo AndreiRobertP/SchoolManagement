@@ -51,9 +51,9 @@
                 </Grid.RowDefinitions>
 
                 <Menu Grid.Row="0">
-                    <MenuItem Header="Adauga"/>
-                    <MenuItem Header="Sterge"/>
-                    <MenuItem Header="Descarca"/>
+                    <Button Content="Adauga"/>
+                    <Button Content="Sterge"/>
+                    <Button Content="Descarca"/>
                 </Menu>
                 <DataGrid Grid.Row="1" AutoGenerateColumns="False">
                     <DataGrid.Columns>
@@ -72,10 +72,10 @@
             </Grid.RowDefinitions>
 
             <Menu Grid.Row="0">
-                <MenuItem Header="Adauga"></MenuItem>
-                <MenuItem Header="Sterge"></MenuItem>
-                <MenuItem Header="Modifica"></MenuItem>
-                <MenuItem Header="Incheie"></MenuItem>
+                <Button Content="Adauga"></Button>
+                <Button Content="Sterge"></Button>
+                <Button Content="Modifica"></Button>
+                <Button Content="Incheie"></Button>
             </Menu>
 
             <DataGrid Grid.Row="1" AutoGenerateColumns="False">
@@ -96,9 +96,9 @@
             </Grid.RowDefinitions>
 
             <Menu Grid.Row="0">
-                <MenuItem Header="Adauga"></MenuItem>
-                <MenuItem Header="Sterge"></MenuItem>
-                <MenuItem Header="Modifica"></MenuItem>
+                <Button Content="Adauga"></Button>
+                <Button Content="Sterge"></Button>
+                <Button Content="Modifica"></Button>
             </Menu>
 
             <DataGrid Grid.Row="1" AutoGenerateColumns="False">
