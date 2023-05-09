@@ -10,12 +10,6 @@ namespace SchoolManagement.Models.EntityLayer
         [Key]
         public int AbsenceId { get { return _absenceId; } set { _absenceId = value; OnPropertyChanged(); } }
 
-        private int _shtId;
-        public int ShtId { get { return _shtId; } set { _shtId = value; OnPropertyChanged(); } }
-
-        private int _studentId;
-        public int StudentId { get { return _studentId; } set { _studentId = value; OnPropertyChanged(); } }
-
         private DateTime _givenDate;
         public DateTime GivenDate { get { return _givenDate; } set { _givenDate = value; OnPropertyChanged(); } }
 
@@ -27,5 +21,14 @@ namespace SchoolManagement.Models.EntityLayer
 
         private Student _student = null!;
         public Student Student { get { return _student; } set { _student = value; OnPropertyChanged(); } }
+
+        public bool CheckValid()
+        {
+            if (Sht == null) return false;
+            if (Student == null) return false;
+
+            return true;
+        }
+
     }
 }

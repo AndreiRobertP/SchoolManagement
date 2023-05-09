@@ -10,9 +10,6 @@ namespace SchoolManagement.Models.EntityLayer
         [Key]
         public int FileId { get { return _fileId; } set { _fileId = value; OnPropertyChanged(); } }
 
-        private int _shtId;
-        public int ShtId { get { return _shtId; } set { _shtId = value; OnPropertyChanged(); } }
-
         private string _filename = "";
         public string Filename { get { return _filename; } set { _filename = value; OnPropertyChanged(); } }
 
@@ -24,5 +21,12 @@ namespace SchoolManagement.Models.EntityLayer
 
         private Sht _sht = null!;
         public Sht Sht { get { return _sht; } set { _sht = value; OnPropertyChanged(); } }
+
+        public bool CheckValid()
+        {
+            if (Sht == null) return false;
+
+            return true;
+        }
     }
 }
