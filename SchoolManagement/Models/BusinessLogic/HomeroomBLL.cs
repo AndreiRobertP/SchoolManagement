@@ -30,7 +30,7 @@ namespace SchoolManagement.Models.BusinessLogic
             using (var context = new SchoolManagementContext())
             {
                 var specialization = context.Specializations.Where(s => s.SpecializationId == newHomeroom.Specialization.SpecializationId).Single();
-                var teacher = context.Teachers.Where(t => t.TeacherId == newHomeroom.Teacher.TeacherId).Single();
+                var teacher = context.Teachers.Where(t => t.TeacherId == newHomeroom.Teacher.TeacherId && t.IsActive).Single();
 
                 newHomeroom.Specialization = specialization;
                 newHomeroom.Teacher = teacher;

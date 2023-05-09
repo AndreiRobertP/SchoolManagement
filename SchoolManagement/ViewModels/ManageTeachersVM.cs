@@ -12,7 +12,7 @@ namespace SchoolManagement.ViewModels
 
 
         public ObservableCollection<Teacher> Teachers { get; set; } = new ObservableCollection<Teacher>();
-        
+
         private Teacher _selectedTeacher;
         public Teacher SelectedTeacher
         {
@@ -26,7 +26,8 @@ namespace SchoolManagement.ViewModels
             }
         }
 
-        private void UpdateFieldFromSelected() {
+        private void UpdateFieldFromSelected()
+        {
             if (SelectedTeacher == null)
                 return;
 
@@ -43,7 +44,8 @@ namespace SchoolManagement.ViewModels
             SelectedTeacher.Name = FieldName;
         }
 
-        private Teacher NewFromField() {
+        private Teacher NewFromField()
+        {
             return new Teacher
             {
                 Name = FieldName,
@@ -106,7 +108,11 @@ namespace SchoolManagement.ViewModels
                             }
                         }
 
-                        TeacherBLL.AddTeacher(NewFromField());
+                        Teacher tmpNew = NewFromField();
+                        if (!tmpNew.CheckValid())
+                            return;
+
+                        TeacherBLL.AddTeacher(tmpNew);
                         UpdateListOfItems();
                     }
                 , () => true
@@ -123,6 +129,9 @@ namespace SchoolManagement.ViewModels
                     () =>
                     {
                         if (SelectedTeacher == null)
+                            return;
+
+                        if (!SelectedTeacher.CheckValid())
                             return;
 
                         foreach (var teacher in Teachers)

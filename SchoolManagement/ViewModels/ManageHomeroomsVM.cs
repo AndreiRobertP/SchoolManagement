@@ -1,11 +1,7 @@
 ﻿using SchoolManagement.Models.BusinessLogic;
 using SchoolManagement.Models.EntityLayer;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SchoolManagement.ViewModels
@@ -41,8 +37,12 @@ namespace SchoolManagement.ViewModels
 
             FieldNameHomeroom = SelectedHomeroom.NameHomeroom;
             FieldYear = SelectedHomeroom.Year;
-            FieldTeacher = SelectedHomeroom.Teacher;
-            FieldSpecialization = SelectedHomeroom.Specialization;
+
+            try { FieldTeacher = Teachers.Where(t => t.TeacherId == SelectedHomeroom.Teacher.TeacherId).Single(); }
+            catch { FieldTeacher = SelectedHomeroom.Teacher; }
+
+            try { FieldSpecialization = Specializations.Where(t => t.SpecializationId == SelectedHomeroom.Specialization.SpecializationId).Single(); }
+            catch { FieldSpecialization = SelectedHomeroom.Specialization; }
         }
 
         private void UpdateSelectedFromField()
@@ -176,8 +176,11 @@ namespace SchoolManagement.ViewModels
                                 return;
                             }
                         }
-
-                        HomeroomBLL.AddHomeroom(NewFromField());
+                        Homeroom tmpNew = NewFromField();
+                        if (!tmpNew.CheckValid())
+                            return;
+                        
+                        HomeroomBLL.AddHomeroom(tmpNew);
                         UpdateListOfItems();
                     }
                 , () => true
@@ -194,6 +197,9 @@ namespace SchoolManagement.ViewModels
                     () =>
                     {
                         if (SelectedHomeroom == null)
+                            return;
+
+                        if (!SelectedHomeroom.CheckValid())
                             return;
 
                         foreach (var Homeroom in Homerooms)

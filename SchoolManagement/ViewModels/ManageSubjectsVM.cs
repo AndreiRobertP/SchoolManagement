@@ -99,7 +99,11 @@ namespace SchoolManagement.ViewModels
                             }
                         }
 
-                        SubjectBLL.AddSubject(NewFromField());
+                        Subject tmpNew = NewFromField();
+                        if (!tmpNew.CheckValid())
+                            return;
+
+                        SubjectBLL.AddSubject(tmpNew);
                         UpdateListOfItems();
                     }
                 , () => true
@@ -116,6 +120,9 @@ namespace SchoolManagement.ViewModels
                     () =>
                     {
                         if (SelectedSubject == null)
+                            return;
+
+                        if (!SelectedSubject.CheckValid())
                             return;
 
                         foreach (var Subject in Subjects)

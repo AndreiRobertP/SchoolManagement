@@ -94,7 +94,11 @@ namespace SchoolManagement.ViewModels
                             }
                         }
 
-                        SpecializationBLL.AddSpecialization(NewFromField());
+                        Specialization tmpNew = NewFromField();
+                        if (!tmpNew.CheckValid())
+                            return;
+
+                        SpecializationBLL.AddSpecialization(tmpNew);
                         UpdateListOfItems();
                     }
                 , () => true
@@ -113,11 +117,14 @@ namespace SchoolManagement.ViewModels
                         if (SelectedSpecialization == null)
                             return;
 
+                        if (!SelectedSpecialization.CheckValid())
+                            return;
+
                         foreach (var Specialization in Specializations)
                         {
                             if (Specialization.NameSpecialization == FieldNameSpecialization && Specialization.SpecializationId != SelectedSpecialization.SpecializationId)
                             {
-                                MessageBox.Show("Exista userNameSpecialization");
+                                MessageBox.Show("Exista materia");
                                 return;
                             }
                         }

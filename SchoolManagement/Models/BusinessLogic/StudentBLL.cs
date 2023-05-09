@@ -29,7 +29,7 @@ namespace SchoolManagement.Models.BusinessLogic
         {
             using (var context = new SchoolManagementContext())
             {
-                Homeroom homeroom = context.Homerooms.Where(h => h.HomeroomId == newStudent.Homeroom.HomeroomId).First();
+                Homeroom homeroom = context.Homerooms.Where(h => h.HomeroomId == newStudent.Homeroom.HomeroomId && h.IsActive).First();
 
                 newStudent.Homeroom = homeroom;
 

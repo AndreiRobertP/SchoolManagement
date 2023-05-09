@@ -39,7 +39,9 @@ namespace SchoolManagement.ViewModels
 
             FieldUsername = SelectedStudent.Username;
             FieldName = SelectedStudent.Name;
-            FieldHomeroom = SelectedStudent.Homeroom;
+
+            try { FieldHomeroom = Homerooms.Where(t => t.HomeroomId == SelectedStudent.Homeroom.HomeroomId).Single(); }
+            catch { FieldHomeroom = SelectedStudent.Homeroom; }
         }
 
         private void UpdateSelectedFromField()
@@ -133,7 +135,11 @@ namespace SchoolManagement.ViewModels
                             }
                         }
 
-                        StudentBLL.AddStudent(NewFromField());
+                        Student tmpNew = NewFromField();
+                        if (!tmpNew.CheckValid())
+                            return;
+
+                        StudentBLL.AddStudent(tmpNew);
                         UpdateListOfItems();
                     }
                 , () => true
@@ -150,6 +156,9 @@ namespace SchoolManagement.ViewModels
                     () =>
                     {
                         if (SelectedStudent == null)
+                            return;
+
+                        if (!SelectedStudent.CheckValid())
                             return;
 
                         foreach (var Student in Students)
