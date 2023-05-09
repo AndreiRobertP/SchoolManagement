@@ -3,10 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SchoolManagement.Views"
+      xmlns:local="clr-namespace:SchoolManagement.Views" xmlns:ViewModels="clr-namespace:SchoolManagement.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManageSubjectsView">
+
+
+    <Page.DataContext>
+        <ViewModels:ManageSubjectsVM/>
+    </Page.DataContext>
 
     <Grid Background="White" Margin="5">
         <Grid.ColumnDefinitions>
@@ -14,9 +19,9 @@
             <ColumnDefinition Width="*" MaxWidth="350"/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Column="0" AutoGenerateColumns="False" Margin="5">\
+        <DataGrid Grid.Column="0" AutoGenerateColumns="False" Margin="5" IsReadOnly="True" ItemsSource="{Binding Subjects}" SelectedItem="{Binding SelectedSubject}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Materie" Width="*"/>
+                <DataGridTextColumn Header="Nume specializare" Width="*" Binding="{Binding NameSubject}" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -28,13 +33,13 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Content="Materie" Margin="5,20,5,0"/>
-            <TextBox Grid.Row="1" Margin="5,0"/>
+            <Label Grid.Row="0" Content="Specializare" Margin="5,20,5,0"/>
+            <TextBox Grid.Row="1" Margin="5,0" Text="{Binding FieldNameSubject}"/>
 
             <WrapPanel Background="#ced4da" Grid.Row="5">
-                <Button Content="Adaugare"/>
-                <Button Content="Dezactivare"/>
-                <Button Content="Modificare"/>
+                <Button Content="Adaugare" Command="{Binding CmdAdd}"/>
+                <Button Content="Dezactivare" Command="{Binding CmdDelete}"/>
+                <Button Content="Modificare" Command="{Binding CmdEdit}"/>
             </WrapPanel>
         </Grid>
     </Grid>

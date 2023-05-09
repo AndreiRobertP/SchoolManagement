@@ -14,11 +14,11 @@
     <DockPanel>
         <Menu Name="MnuUserRolesMenu" DockPanel.Dock="Top" Visibility="Collapsed">
             <MenuItem Name="MnuAdmin" Header="Admin" Visibility="Collapsed">
-                <MenuItem Header="Gestiune specializari"/>
+                <MenuItem Header="Gestiune specializari" Name="MniManageSpecializations" Click="MniManageSpecializations_Click" />
                 <MenuItem Header="Gestiune profesori" Name="MniManageTeachers" Click="MniManageTeachers_Click"/>
-                <MenuItem Header="Gestiune materii"/>
-                <MenuItem Header="Gestiune clase"/>
-                <MenuItem Header="Gestiune elevi"/>
+                <MenuItem Header="Gestiune materii" Name="MniManageSubjects" Click="MniManageSubjects_Click"/>
+                <MenuItem Header="Gestiune clase" Name="MniManageHomerooms" Click="MniManageHomerooms_Click"/>
+                <MenuItem Header="Gestiune elevi" Name="MniManageStudents" Click="MniManageStudents_Click"/>
             </MenuItem>
             <MenuItem Name="MnuTeacher" Header="Profesor" Visibility="Collapsed">
                 <MenuItem Header="Catalog"/>

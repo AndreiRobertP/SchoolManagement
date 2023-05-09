@@ -23,12 +23,12 @@ namespace SchoolManagement.Models.EntityLayer
         public int TeacherId { get { return _teacherId; } set { _teacherId = value; OnPropertyChanged(); } }
 
         private Teacher _teacher = null!;
-        public Teacher Teacher { get { return _teacher; } set { _teacher = value; OnPropertyChanged(); } }
+        public Teacher Teacher { get { return _teacher; } set { _teacher = value; OnPropertyChanged(); if (value != null) TeacherId = value.TeacherId; } }
 
         private int _specializationId = -1;
         public int SpecializationId { get { return _specializationId; } set { _specializationId = value; OnPropertyChanged(); } }
 
         private Specialization _specialization = null!;
-        public Specialization Specialization { get { return _specialization; } set { _specialization = value; OnPropertyChanged(); } }
+        public Specialization Specialization { get { return _specialization; } set { _specialization = value; OnPropertyChanged(); if (value != null) SpecializationId = value.SpecializationId; } }
     }
 }

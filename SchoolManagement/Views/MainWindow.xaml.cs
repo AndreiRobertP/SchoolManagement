@@ -40,8 +40,10 @@ namespace SchoolManagement
             LoginVM.PropertyChanged += OnLoginChange;
         }
 
-        void OnLoginChange(object sender, PropertyChangedEventArgs e) {
-            if (e.PropertyName == nameof(LoginVM.UserPermisions)) {
+        void OnLoginChange(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(LoginVM.UserPermisions))
+            {
                 UserPermisions userPermisions = LoginVM.UserPermisions;
 
                 SetVisibilityMenuRoles(userPermisions.IsRegistered);
@@ -52,7 +54,8 @@ namespace SchoolManagement
             }
         }
 
-        public void SetVisibilityMenuRoles(bool visibility) {
+        public void SetVisibilityMenuRoles(bool visibility)
+        {
             MnuUserRolesMenu.Visibility = visibility == true ? Visibility.Visible : Visibility.Collapsed;
         }
 
@@ -79,6 +82,26 @@ namespace SchoolManagement
         private void MniManageTeachers_Click(object sender, RoutedEventArgs e)
         {
             frmMain.Content = new ManageTeachersView();
+        }
+
+        private void MniManageSpecializations_Click(object sender, RoutedEventArgs e)
+        {
+            frmMain.Content = new ManageSpecialisationsView();
+        }
+
+        private void MniManageSubjects_Click(object sender, RoutedEventArgs e)
+        {
+            frmMain.Content = new ManageSubjectsView();
+        }
+
+        private void MniManageHomerooms_Click(object sender, RoutedEventArgs e)
+        {
+            frmMain.Content = new ManageHomeroomsView();
+        }
+
+        private void MniManageStudents_Click(object sender, RoutedEventArgs e)
+        {
+            frmMain.Content = new ManageStudentsView();
         }
     }
 }

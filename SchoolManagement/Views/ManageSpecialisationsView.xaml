@@ -1,22 +1,26 @@
-﻿<Page x:Class="SchoolManagement.Views.ManageSpecialisationView"
+﻿<Page x:Class="SchoolManagement.Views.ManageSpecialisationsView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SchoolManagement.Views"
+      xmlns:local="clr-namespace:SchoolManagement.Views" xmlns:ViewModels="clr-namespace:SchoolManagement.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManageSpecialisationView">
 
+    <Page.DataContext>
+        <ViewModels:ManageSpecializationsVM/>
+    </Page.DataContext>
+    
     <Grid Background="White" Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*" MaxWidth="350"/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Column="0" AutoGenerateColumns="False" Margin="5">\
+        <DataGrid Grid.Column="0" AutoGenerateColumns="False" Margin="5" IsReadOnly="True" ItemsSource="{Binding Specializations}" SelectedItem="{Binding SelectedSpecialization}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nume specializare" Width="*"/>
+                <DataGridTextColumn Header="Nume specializare" Width="*" Binding="{Binding NameSpecialization}" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -29,12 +33,12 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Content="Specializare" Margin="5,20,5,0"/>
-            <TextBox Grid.Row="1" Margin="5,0"/>
+            <TextBox Grid.Row="1" Margin="5,0" Text="{Binding FieldNameSpecialization}"/>
 
             <WrapPanel Background="#ced4da" Grid.Row="5">
-                <Button Content="Adaugare"/>
-                <Button Content="Dezactivare"/>
-                <Button Content="Modificare"/>
+                <Button Content="Adaugare" Command="{Binding CmdAdd}"/>
+                <Button Content="Dezactivare" Command="{Binding CmdDelete}"/>
+                <Button Content="Modificare" Command="{Binding CmdEdit}"/>
             </WrapPanel>
         </Grid>
     </Grid>

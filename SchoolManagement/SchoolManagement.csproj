@@ -21,19 +21,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\ManageSpecialisationView.xaml.cs">
+    <Compile Update="Views\ManageSpecialisationsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ManageSubjectsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ManageClassroomsView.xaml.cs">
+    <Compile Update="Views\ManageHomeroomsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Views\ManageSpecialisationView.xaml">
+    <Page Update="Views\ManageSpecialisationsView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
@@ -41,7 +41,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ManageClassroomsView.xaml">
+    <Page Update="Views\ManageHomeroomsView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

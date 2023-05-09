@@ -18,9 +18,9 @@ namespace SchoolManagement.Views
     /// <summary>
     /// Interaction logic for ManageSubjectsView.xaml
     /// </summary>
-    public partial class ManageClassroomsView : Page
+    public partial class ManageHomeroomsView : Page
     {
-        public ManageClassroomsView()
+        public ManageHomeroomsView()
         {
             InitializeComponent();
         }
