@@ -24,6 +24,6 @@ namespace SchoolManagement.Models.EntityLayer
         public bool IsActive { get { return _isActive; } set { _isActive = value; OnPropertyChanged(); } }
 
         private Homeroom _homeroom = null!;
-        public Homeroom Homeroom { get { return _homeroom; } set { _homeroom = value; OnPropertyChanged(); } }
+        public Homeroom Homeroom { get { return _homeroom; } set { _homeroom = value; OnPropertyChanged(); if (value != null) HomeroomId = value.HomeroomId; } }
     }
 }
