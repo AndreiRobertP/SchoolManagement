@@ -97,6 +97,15 @@ namespace SchoolManagement
         {
             frmMain.Content = new ManageShtsView();
         }
-        
+
+        private void MniTeacherCatalog_Click(object sender, RoutedEventArgs e)
+        {
+            frmMain.Content = new TeacherCatalogView();
+        }
+
+        private void MniTeacherFile_Click(object sender, RoutedEventArgs e)
+        {
+            frmMain.Content= new TeacherFileView();
+        }
     }
 }

@@ -22,6 +22,9 @@ namespace SchoolManagement.Models.EntityLayer
         private bool _isActive = true;
         public bool IsActive { get { return _isActive; } set { _isActive = value; OnPropertyChanged(); } }
 
+        private int _semester = 1;
+        public int Semester { get { return _semester; } set { _semester = value; OnPropertyChanged(); } }
+
         private Sht _sht = null!;
         public Sht Sht { get { return _sht; } set { _sht = value; OnPropertyChanged(); } }
 

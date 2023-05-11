@@ -22,7 +22,8 @@
                 <MenuItem Header="Gestiune sht" Name="MniManageSht" Click="MniManageSht_Click"/>
             </MenuItem>
             <MenuItem Name="MnuTeacher" Header="Profesor" Visibility="Collapsed">
-                <MenuItem Header="Catalog"/>
+                <MenuItem Header="Catalog" Name="MniTeacherCatalog" Click="MniTeacherCatalog_Click"/>
+                <MenuItem Header="Fisiere" Name="MniTeacherFile" Click="MniTeacherFile_Click"/>
             </MenuItem>
             <MenuItem Name="MnuHomeroomTeacher" Header="Diriginte" Visibility="Collapsed">
                 <MenuItem Header="Catalog clasa"></MenuItem>

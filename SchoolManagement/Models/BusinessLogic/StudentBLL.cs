@@ -57,5 +57,18 @@ namespace SchoolManagement.Models.BusinessLogic
                 context.SaveChanges();
             }
         }
+
+        public ObservableCollection<Student> GetStudentsBySht(Sht sht)
+        {
+            ObservableCollection<Student> collection = new ObservableCollection<Student>();
+            using (var context = new SchoolManagementContext())
+            {
+                var Students = context.Students.Where(t => t.IsActive && t.Homeroom.HomeroomId == sht.Homeroom.HomeroomId).Include(t => t.Homeroom).ToList();
+
+                foreach (var Student in Students)
+                    collection.Add(Student);
+            }
+            return collection;
+        }
     }
 }

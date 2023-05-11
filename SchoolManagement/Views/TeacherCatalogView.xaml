@@ -3,14 +3,17 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SchoolManagement.Views"
+      xmlns:local="clr-namespace:SchoolManagement.Views" xmlns:ViewModels="clr-namespace:SchoolManagement.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TeacherCatalogView">
 
+    <Page.DataContext>
+        <ViewModels:TeacherCatalogVM/>
+    </Page.DataContext>
+    
     <Grid Background="white" Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -21,93 +24,79 @@
         </Grid.ColumnDefinitions>
 
         <!-- Alegere materie clasa -->
-        <Grid Margin="5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
-            <DataGrid AutoGenerateColumns="False">
+        <Grid Margin="5" Grid.Column="0">
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Shts}" SelectedItem="{Binding FieldSht}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Materie" Width="*"/>
-                    <DataGridTextColumn Header="Clasa" Width="*"/>
+                    <DataGridTextColumn Header="Materie" Width="*" Binding="{Binding Subject.NameSubject}"/>
+                    <DataGridTextColumn Header="Clasa" Width="*" Binding="{Binding Homeroom.NameHomeroom}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        
-        <!-- Alegere elev & materiale -->
-        <Grid Margin="5" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
 
-            <DataGrid Grid.Row="0">
+        <!-- Alegere elev & materiale -->
+        <Grid Margin="5" Grid.Column="1">
+            <DataGrid IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Students}" SelectedItem="{Binding FieldStudent}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nr" Width="auto"/>
-                    <DataGridTextColumn Header="Nume elev" Width="*"/>
+                    <DataGridTextColumn Header="Nume elev" Width="*" Binding="{Binding Name}"/>
                 </DataGrid.Columns>
             </DataGrid>
+        </Grid>
 
-            <Grid Grid.Row="1" Margin="0,10,0,0">
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Semestru -->
+            <WrapPanel Background="#e5e5e5" Grid.Row="0" Margin="5">
+                <RadioButton Content="Sem I" GroupName="Semester"/>
+                <RadioButton Content="Sem II" GroupName="Semester" IsChecked="{Binding FieldSemesterBinary}"/>
+            </WrapPanel>
+
+            <!-- Note -->
+            <Grid Margin="5" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Menu Grid.Row="0">
-                    <Button Content="Adauga"/>
-                    <Button Content="Sterge"/>
-                    <Button Content="Descarca"/>
-                </Menu>
-                <DataGrid Grid.Row="1" AutoGenerateColumns="False">
+                <WrapPanel Background="#ced4da" Grid.Row="0">
+                    <Button Content="Adauga"></Button>
+                    <Button Content="Sterge"></Button>
+                    <Button Content="Modifica"></Button>
+                    <Button Content="Incheie"></Button>
+                </WrapPanel>
+
+                <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Grades}" SelectedItem="{Binding SelectedGrade}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Nume material" Width="*"/>
-                        <DataGridTextColumn Header="Data" Width="auto"/>
+                        <DataGridTextColumn Header="Nota" Width="*" Binding="{Binding Value}"/>
+                        <DataGridTextColumn Header="Data" Width="*" Binding="{Binding GivenDate}"/>
+                        <DataGridTextColumn Header="Teza" Width="auto" Binding="{Binding IsThesis}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-        </Grid>
 
-        <!-- Note -->
-        <Grid Margin="5" Grid.Column="2" Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <!-- Absente -->
+            <Grid Margin="5" Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <Menu Grid.Row="0">
-                <Button Content="Adauga"></Button>
-                <Button Content="Sterge"></Button>
-                <Button Content="Modifica"></Button>
-                <Button Content="Incheie"></Button>
-            </Menu>
+                <WrapPanel Background="#ced4da" Grid.Row="0">
+                    <Button Content="Adauga"></Button>
+                    <Button Content="Sterge"></Button>
+                    <Button Content="Modifica"></Button>
+                </WrapPanel>
 
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nr" Width="auto"/>
-                    <DataGridTextColumn Header="Nota" Width="*"/>
-                    <DataGridTextColumn Header="Data" Width="*"/>
-                    <DataGridTextColumn Header="Teza" Width="auto"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-
-        <!-- Absente -->
-        <Grid Margin="5" Grid.Column="2" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Menu Grid.Row="0">
-                <Button Content="Adauga"></Button>
-                <Button Content="Sterge"></Button>
-                <Button Content="Modifica"></Button>
-            </Menu>
-
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nr" Width="auto"/>
-                    <DataGridTextColumn Header="Data" Width="*"/>
-                    <DataGridTextColumn Header="Status" Width="auto"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Absences}" SelectedItem="{Binding SelectedAbsence}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Data" Width="*" Binding="{Binding GivenDate}"/>
+                        <DataGridTextColumn Header="Status" Width="*" Binding="{Binding IsActive}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
 
         <!-- Status -->

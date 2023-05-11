@@ -5,10 +5,6 @@ namespace SchoolManagement.Models.EntityLayer
 {
     public class Admin : BasePropertyChanged
     {
-        // =====================
-        // Basic props for user
-        // =====================
-
         private int _id;
         [Key]
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }
