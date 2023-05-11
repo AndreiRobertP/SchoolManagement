@@ -19,6 +19,7 @@
                 <MenuItem Header="Gestiune materii" Name="MniManageSubjects" Click="MniManageSubjects_Click"/>
                 <MenuItem Header="Gestiune clase" Name="MniManageHomerooms" Click="MniManageHomerooms_Click"/>
                 <MenuItem Header="Gestiune elevi" Name="MniManageStudents" Click="MniManageStudents_Click"/>
+                <MenuItem Header="Gestiune sht" Name="MniManageSht" Click="MniManageSht_Click"/>
             </MenuItem>
             <MenuItem Name="MnuTeacher" Header="Profesor" Visibility="Collapsed">
                 <MenuItem Header="Catalog"/>
