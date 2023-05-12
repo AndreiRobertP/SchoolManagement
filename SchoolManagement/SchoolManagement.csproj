@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AddEditAbsenceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ManageSpecialisationsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -33,6 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Views\AddEditAbsenceView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ManageSpecialisationsView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

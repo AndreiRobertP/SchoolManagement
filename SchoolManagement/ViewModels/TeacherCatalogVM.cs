@@ -229,5 +229,65 @@ namespace SchoolManagement.ViewModels
                 ));
             }
         }
+
+        //Commands
+        private RelayCommand? _cmdAddAbsence;
+        public RelayCommand CmdAddAbsence
+        {
+            get
+            {
+                return _cmdAddAbsence ?? (_cmdAddAbsence = new RelayCommand(
+                    () =>
+                    {
+                        if (FieldSht == null)
+                        {
+                            MessageBox.Show("Nu exista clasa selectata");
+                            return;
+                        }
+
+                        if (FieldStudent == null)
+                        {
+                            MessageBox.Show("Nu exista student selectat");
+                            return;
+                        }
+
+                        Absence newAbsence = new Absence
+                        {
+                            Sht = FieldSht,
+                            Student = FieldStudent,
+                            GivenDate = DateTime.Today,
+                            IsActive = true,
+                            Semester = FieldSemester
+                        };
+
+                        AddEditAbsenceView addEditAbsenceView = new AddEditAbsenceView();
+                        addEditAbsenceView.Absence = newAbsence;
+                        addEditAbsenceView.ShowDialog();
+
+                        UpdateListOfAbsences();
+                    }
+                , () => true
+                ));
+            }
+        }
+
+        private RelayCommand? _cmdDeleteAbsence;
+        public RelayCommand CmdDeleteAbsence
+        {
+            get
+            {
+                return _cmdDeleteAbsence ?? (_cmdDeleteAbsence = new RelayCommand(
+                    () =>
+                    {
+                        if (SelectedAbsence == null)
+                            return;
+
+                        AbsenceBLL.RemoveAbsence(SelectedAbsence);
+                        UpdateListOfAbsences();
+                    }
+                , () => true
+                ));
+            }
+        }
     }
 }

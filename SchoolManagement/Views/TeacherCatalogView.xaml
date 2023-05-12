@@ -84,14 +84,14 @@
                 </Grid.RowDefinitions>
 
                 <WrapPanel Background="#ced4da" Grid.Row="0">
-                    <Button Content="Adauga"></Button>
-                    <Button Content="Motiveaza"></Button>
+                    <Button Content="Adauga" Command="{Binding CmdAddAbsence}"></Button>
+                    <Button Content="Motiveaza" Command="{Binding CmdDeleteAbsence}"></Button>
                 </WrapPanel>
 
                 <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Absences}" SelectedItem="{Binding SelectedAbsence}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Data" Width="*" Binding="{Binding GivenDate}"/>
-                        <DataGridTextColumn Header="Status" Width="*" Binding="{Binding IsActive}"/>
+                        <DataGridTextColumn Header="Nemotivat" Width="*" Binding="{Binding IsActive}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
