@@ -10,8 +10,8 @@ namespace SchoolManagement.Models.EntityLayer
         [Key]
         public int GradeId { get { return _gradeId; } set { _gradeId = value; OnPropertyChanged(); } }
 
-        private float _value = 0;
-        public float Value { get { return _value; } set { _value = value; OnPropertyChanged(); } }
+        private int _value = 0;
+        public int Value { get { return _value; } set { _value = value; OnPropertyChanged(); } }
 
         private DateTime _givenDate;
         public DateTime GivenDate { get { return _givenDate; } set { _givenDate = value; OnPropertyChanged(); } }
@@ -35,6 +35,7 @@ namespace SchoolManagement.Models.EntityLayer
         {
             if (Sht == null) return false;
             if (Student == null) return false;
+            if (IsThesis && !Sht.HasThesis) return false;
 
             return true;
         }

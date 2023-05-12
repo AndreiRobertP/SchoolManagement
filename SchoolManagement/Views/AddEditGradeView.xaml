@@ -1,0 +1,45 @@
+﻿<Window x:Class="SchoolManagement.Views.AddEditGradeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SchoolManagement.Views"
+        xmlns:viewModels="clr-namespace:SchoolManagement.ViewModels"
+        mc:Ignorable="d"
+        Title="AddEditGrade" Height="500" MinHeight="450" Width="350" MinWidth="300">
+    
+    <Window.DataContext>
+        <viewModels:AddEditGradeVM/>
+    </Window.DataContext>
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+<RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18" Content="Adaugare nota" Margin="10"/>
+        <Label Grid.Row="2" Content="{Binding FieldName}"/>
+        <Label Grid.Row="3" Content="{Binding FieldSubject}"/>
+        <Label Grid.Row="5" Content="{Binding FieldSemester}"/>
+        <Label Grid.Row="6" Margin="0,10,0,0" Content="Nota"/>
+        <ComboBox Grid.Row="7" ItemsSource="{Binding Values}" SelectedItem="{Binding FieldValue}"></ComboBox>
+        <Label Grid.Row="8" Margin="0,5,0,0" Content="Data"/>
+        <DatePicker Grid.Row="9" DisplayDate="{Binding FieldDate}"></DatePicker>
+        <CheckBox Grid.Row="10" Margin="0,5,0,0" Content="Teza" IsChecked="{Binding FieldThesis}"/>
+        <CheckBox Grid.Row="11" Margin="0,5,0,0" Content="Activ" IsChecked="{Binding FieldActive}"/>
+        <Button Grid.Row="12" Margin="5,15,5,5" Content="Confirma" Name="BtnConfirm" Click="BtnConfirm_OnClick"/>
+    </Grid>
+</Window>

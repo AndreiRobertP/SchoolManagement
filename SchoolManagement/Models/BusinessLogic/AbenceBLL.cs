@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SchoolManagement.Models.BusinessLogic
 {
@@ -16,7 +17,7 @@ namespace SchoolManagement.Models.BusinessLogic
             ObservableCollection<Absence> collection = new ObservableCollection<Absence>();
             using (var context = new SchoolManagementContext())
             {
-                var Absences = context.Absences.ToList();
+                var Absences = context.Absences.Include(g => g.Student).Include(g => g.Sht).ToList();
 
                 foreach (var Absence in Absences)
                     collection.Add(Absence);
@@ -60,7 +61,7 @@ namespace SchoolManagement.Models.BusinessLogic
             ObservableCollection<Absence> collection = new ObservableCollection<Absence>();
             using (var context = new SchoolManagementContext())
             {
-                var Absences = context.Absences.Where(f => f.Sht.ShtId == sht.ShtId && f.Student.StudentId == student.StudentId && f.Semester == semester).ToList();
+                var Absences = context.Absences.Where(f => f.Sht.ShtId == sht.ShtId && f.Student.StudentId == student.StudentId && f.Semester == semester).Include(g => g.Student).Include(g => g.Sht).ToList();
 
                 foreach (var Absence in Absences)
                     collection.Add(Absence);

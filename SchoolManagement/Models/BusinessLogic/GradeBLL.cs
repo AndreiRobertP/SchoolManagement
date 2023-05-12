@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SchoolManagement.Models.BusinessLogic
 {
@@ -16,7 +17,7 @@ namespace SchoolManagement.Models.BusinessLogic
             ObservableCollection<Grade> collection = new ObservableCollection<Grade>();
             using (var context = new SchoolManagementContext())
             {
-                var Grades = context.Grades.ToList();
+                var Grades = context.Grades.Where(g => g.IsActive).Include(g => g.Student).Include(g => g.Sht).ToList();
 
                 foreach (var Grade in Grades)
                     collection.Add(Grade);
@@ -33,6 +34,20 @@ namespace SchoolManagement.Models.BusinessLogic
 
                 newGrade.Sht = sht;
                 newGrade.Student = student;
+
+                //Make sure there is only one thesis/semester/subject and this Sht accepts a Thesis
+                if (newGrade.IsThesis)
+                {
+                    var thesis = context.Grades.Where(g =>
+                        g.IsActive && g.IsThesis && g.Semester == newGrade.Semester &&
+                        g.Sht.ShtId == newGrade.Sht.ShtId).Count();
+
+                    if (thesis > 0)
+                        throw new Exception("There is already an existing thesis");
+
+                    if (!newGrade.Sht.HasThesis)
+                        throw new Exception("This subject doesn't accept a thesis for this homeroom");
+                }
 
                 context.Grades.Add(newGrade);
                 context.SaveChanges();
@@ -60,7 +75,7 @@ namespace SchoolManagement.Models.BusinessLogic
             ObservableCollection<Grade> collection = new ObservableCollection<Grade>();
             using (var context = new SchoolManagementContext())
             {
-                var Grades = context.Grades.Where(f => f.Sht.ShtId == sht.ShtId && f.Student.StudentId == student.StudentId && f.Semester == semester).ToList();
+                var Grades = context.Grades.Where(f => f.Sht.ShtId == sht.ShtId && f.Student.StudentId == student.StudentId && f.Semester == semester && f.IsActive).Include(g => g.Student).Include(g => g.Sht).ToList();
 
                 foreach (var Grade in Grades)
                     collection.Add(Grade);

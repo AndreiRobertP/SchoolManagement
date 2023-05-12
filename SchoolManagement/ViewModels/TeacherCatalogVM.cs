@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using SchoolManagement.Views;
 
 namespace SchoolManagement.ViewModels
 {
@@ -168,7 +169,7 @@ namespace SchoolManagement.ViewModels
         }
 
         //Commands
-        private RelayCommand _cmdAddGrade;
+        private RelayCommand? _cmdAddGrade;
         public RelayCommand CmdAddGrade
         {
             get
@@ -188,7 +189,21 @@ namespace SchoolManagement.ViewModels
                             return;
                         }
 
-                        MessageBox.Show("Fereastra de adaugat nota");
+                        Grade newGrade = new Grade
+                        {
+                            Sht = FieldSht,
+                            Student = FieldStudent,
+                            Value = 10,
+                            GivenDate = DateTime.Today,
+                            IsThesis = false,
+                            IsActive = true,
+                            Semester = FieldSemester
+                        };
+
+                        AddEditGradeView addEditGradeView = new AddEditGradeView();
+                        addEditGradeView.Grade = newGrade;
+                        addEditGradeView.ShowDialog();
+
                         UpdateListOfGrades();
                     }
                 , () => true
@@ -196,40 +211,12 @@ namespace SchoolManagement.ViewModels
             }
         }
 
-        private RelayCommand _cmdEditGrade;
-        public RelayCommand CmdEditGrade
-        {
-            get
-            {
-                return _cmdEditGrade ?? (_cmdEditGrade = new RelayCommand(
-                    () =>
-                    {
-                        if (FieldSht == null)
-                        {
-                            MessageBox.Show("Nu exista clasa selectata");
-                            return;
-                        }
-
-                        if (FieldStudent == null)
-                        {
-                            MessageBox.Show("Nu exista student selectat");
-                            return;
-                        }
-
-                        MessageBox.Show("Fereastra de editat nota");
-                        UpdateListOfGrades();
-                    }
-                , () => true
-                ));
-            }
-        }
-
-        private RelayCommand _cmdDelete;
+        private RelayCommand? _cmdDeleteGrade;
         public RelayCommand CmdDeleteGrade
         {
             get
             {
-                return _cmdDelete ?? (_cmdDelete = new RelayCommand(
+                return _cmdDeleteGrade ?? (_cmdDeleteGrade = new RelayCommand(
                     () =>
                     {
                         if (SelectedGrade == null)

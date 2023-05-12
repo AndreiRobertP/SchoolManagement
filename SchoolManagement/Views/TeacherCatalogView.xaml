@@ -62,9 +62,8 @@
                 </Grid.RowDefinitions>
 
                 <WrapPanel Background="#ced4da" Grid.Row="0">
-                    <Button Content="Adauga"></Button>
-                    <Button Content="Sterge"></Button>
-                    <Button Content="Modifica"></Button>
+                    <Button Content="Adauga" Command="{Binding CmdAddGrade}"></Button>
+                    <Button Content="Sterge" Command="{Binding CmdDeleteGrade}"></Button>
                     <Button Content="Incheie"></Button>
                 </WrapPanel>
 
@@ -86,8 +85,7 @@
 
                 <WrapPanel Background="#ced4da" Grid.Row="0">
                     <Button Content="Adauga"></Button>
-                    <Button Content="Sterge"></Button>
-                    <Button Content="Modifica"></Button>
+                    <Button Content="Motiveaza"></Button>
                 </WrapPanel>
 
                 <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Absences}" SelectedItem="{Binding SelectedAbsence}">
