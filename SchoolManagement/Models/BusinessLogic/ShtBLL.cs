@@ -79,5 +79,18 @@ namespace SchoolManagement.Models.BusinessLogic
             }
             return collection;
         }
+
+        public ObservableCollection<Sht> GetShtsByTeacher(Teacher teacher)
+        {
+            ObservableCollection<Sht> collection = new ObservableCollection<Sht>();
+            using (var context = new SchoolManagementContext())
+            {
+                var Shts = context.Shts.Where(t => t.IsActive && t.Teacher.TeacherId == teacher.TeacherId).Include(h => h.Teacher).Include(h => h.Subject).Include(h => h.Homeroom).Include(h => h.Homeroom.Specialization).ToList();
+
+                foreach (var Sht in Shts)
+                    collection.Add(Sht);
+            }
+            return collection;
+        }
     }
 }

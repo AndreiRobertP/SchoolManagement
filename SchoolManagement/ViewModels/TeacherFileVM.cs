@@ -26,6 +26,20 @@ namespace SchoolManagement.ViewModels
             }
         }
 
+        private Teacher _fieldTeacher;
+        public Teacher FieldTeacher
+        {
+            get { return _fieldTeacher; }
+            set
+            {
+                _fieldTeacher = value;
+                OnPropertyChanged();
+
+                if (value != null)
+                    UpdateListOfShts();
+            }
+        }
+
         private Sht _fieldSht = null!;
         public Sht FieldSht
         {
@@ -55,20 +69,20 @@ namespace SchoolManagement.ViewModels
 
         public TeacherFileVM()
         {
-            UpdateListOfShts();
+            
         }
 
         public void UpdateListOfShts()
         {
             Shts.Clear();
-            foreach (Sht Sht in ShtBLL.GetShts())
+            foreach (Sht Sht in ShtBLL.GetShtsByTeacher(FieldTeacher))
             {
                 Shts.Add(Sht);
             }
         }
 
         //Commands
-        private RelayCommand _cmdAdd;
+        private RelayCommand? _cmdAdd;
         public RelayCommand CmdAdd
         {
             get
@@ -104,7 +118,7 @@ namespace SchoolManagement.ViewModels
             }
         }
 
-        private RelayCommand _cmdDownload;
+        private RelayCommand? _cmdDownload;
         public RelayCommand CmdDownload
         {
             get
@@ -130,7 +144,7 @@ namespace SchoolManagement.ViewModels
             }
         }
 
-        private RelayCommand _cmdDelete;
+        private RelayCommand? _cmdDelete;
         public RelayCommand CmdDelete
         {
             get

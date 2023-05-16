@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SchoolManagement.Models.EntityLayer;
+using SchoolManagement.ViewModels;
 
 namespace SchoolManagement.Views
 {
@@ -20,9 +22,13 @@ namespace SchoolManagement.Views
     /// </summary>
     public partial class TeacherCatalogView : Page
     {
+        public TeacherCatalogVM TeacherCatalogVm { get; set; }
+
         public TeacherCatalogView()
         {
             InitializeComponent();
+
+            TeacherCatalogVm = DataContext as TeacherCatalogVM;
         }
     }
 }

@@ -55,6 +55,20 @@ namespace SchoolManagement.ViewModels
             }
         }
 
+        private Teacher _fieldTeacher = null!;
+        public Teacher FieldTeacher
+        {
+            get { return _fieldTeacher; }
+            set
+            {
+                _fieldTeacher = value;
+                OnPropertyChanged();
+
+                if (value != null)
+                    UpdateListOfShts();
+            }
+        }
+
         private Sht _fieldSht = null!;
         public Sht FieldSht
         {
@@ -114,10 +128,10 @@ namespace SchoolManagement.ViewModels
             Students.Clear();
             Grades.Clear();
             Absences.Clear();
+            SelectedMean = null!;
 
-
-            foreach (Sht sht in ShtBLL.GetShts())
-            { //TODO GetShts by Teacher
+            foreach (Sht sht in ShtBLL.GetShtsByTeacher(FieldTeacher))
+            {
                 Shts.Add(sht);
             }
 
@@ -191,7 +205,6 @@ namespace SchoolManagement.ViewModels
 
         public TeacherCatalogVM()
         {
-            UpdateListOfShts();
         }
 
         public String MeanInfo => SelectedMean == null! ? "[Medie semestriala neincheiata]" : $"[Medie semestriala {SelectedMean.Value.ToString()}]";

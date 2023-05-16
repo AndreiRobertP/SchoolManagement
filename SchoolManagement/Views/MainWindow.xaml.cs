@@ -101,12 +101,17 @@ namespace SchoolManagement
 
         private void MniTeacherCatalog_Click(object sender, RoutedEventArgs e)
         {
-            frmMain.Content = new TeacherCatalogView();
+            TeacherCatalogView tcv = new TeacherCatalogView();
+            tcv.TeacherCatalogVm.FieldTeacher = MainWindowViewModel.UserLoginResponse.Teacher;
+            frmMain.Content = tcv;
         }
 
         private void MniTeacherFile_Click(object sender, RoutedEventArgs e)
         {
-            frmMain.Content = new TeacherFileView();
+
+            TeacherFileView tfv = new TeacherFileView();
+            tfv.TeacherFileVM.FieldTeacher = MainWindowViewModel.UserLoginResponse.Teacher;
+            frmMain.Content = tfv;
         }
 
         private void MniHomeroomTeacherCatalog_OnClick(object sender, RoutedEventArgs e)
