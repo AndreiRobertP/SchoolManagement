@@ -64,7 +64,7 @@
                 <WrapPanel Background="#ced4da" Grid.Row="0">
                     <Button Content="Adauga" Command="{Binding CmdAddGrade}"></Button>
                     <Button Content="Sterge" Command="{Binding CmdDeleteGrade}"></Button>
-                    <Button Content="Incheie"></Button>
+                    <Button Content="Incheie" Command="{Binding CmdCloseMean}"></Button>
                 </WrapPanel>
 
                 <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Grades}" SelectedItem="{Binding SelectedGrade}">
@@ -99,8 +99,6 @@
 
         <!-- Status -->
         <Menu IsEnabled="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" >
-            <Label>Status : Neincheiat [se poate incheia]</Label>
-            <Label>Medie: 8.50</Label>
-        </Menu>
+            <Label Content="{Binding MeanInfo}"></Label></Menu>
     </Grid>
 </Page>

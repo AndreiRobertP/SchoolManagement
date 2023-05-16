@@ -1,12 +1,8 @@
-﻿using Microsoft.Win32;
-using SchoolManagement.Models.BusinessLogic;
+﻿using SchoolManagement.Models.BusinessLogic;
 using SchoolManagement.Models.EntityLayer;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using SchoolManagement.Views;
 
@@ -18,6 +14,7 @@ namespace SchoolManagement.ViewModels
         public AbsenceBLL AbsenceBLL { get; set; } = new AbsenceBLL();
         public ShtBLL ShtBLL { get; set; } = new ShtBLL();
         public StudentBLL StudentBLL { get; set; } = new StudentBLL();
+        public MeanBLL MeanBLL { get; set; } = new MeanBLL();
 
         public ObservableCollection<Sht> Shts { get; set; } = new ObservableCollection<Sht>();
         public ObservableCollection<Student> Students { get; set; } = new ObservableCollection<Student>();
@@ -43,6 +40,18 @@ namespace SchoolManagement.ViewModels
             {
                 _selectedAbsence = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private Mean _selectedMean = null!;
+        public Mean SelectedMean
+        {
+            get { return _selectedMean; }
+            set
+            {
+                _selectedMean = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(MeanInfo));
             }
         }
 
@@ -73,6 +82,7 @@ namespace SchoolManagement.ViewModels
                 {
                     UpdateListOfGrades();
                     UpdateListOfAbsences();
+                    UpdateMean();
                 }
             }
         }
@@ -89,6 +99,7 @@ namespace SchoolManagement.ViewModels
 
                 UpdateListOfGrades();
                 UpdateListOfAbsences();
+                UpdateMean();
             }
         }
 
@@ -118,8 +129,9 @@ namespace SchoolManagement.ViewModels
             Students.Clear();
             Grades.Clear();
             Absences.Clear();
+            SelectedMean = null!;
 
-            if (FieldSht == null)
+            if (FieldSht == null!)
                 return;
 
             foreach (Student student in StudentBLL.GetStudentsBySht(FieldSht))
@@ -129,22 +141,36 @@ namespace SchoolManagement.ViewModels
 
             UpdateListOfGrades();
             UpdateListOfAbsences();
+            UpdateMean();
         }
 
         public void UpdateListOfGrades()
         {
             Grades.Clear();
 
-            if (FieldSht == null)
+            if (FieldSht == null!)
                 return;
 
-            if (FieldStudent == null)
+            if (FieldStudent == null!)
                 return;
 
             foreach (Grade grade in GradeBLL.GetGradesByShtAndStudentAndSemester(FieldSht, FieldStudent, FieldSemester))
             {
                 Grades.Add(grade);
             }
+        }
+
+        public void UpdateMean()
+        {
+            if (FieldSht == null)
+                return;
+
+            if (FieldStudent == null)
+                return;
+
+            var tmp = MeanBLL.GetMeansByShtAndStudentAndSemester(FieldSht, FieldStudent, FieldSemester);
+
+            SelectedMean = (tmp.Any() ? tmp.Single(): null!);
         }
 
         public void UpdateListOfAbsences()
@@ -168,15 +194,23 @@ namespace SchoolManagement.ViewModels
             UpdateListOfShts();
         }
 
+        public String MeanInfo => SelectedMean == null! ? "[Medie semestriala neincheiata]" : $"[Medie semestriala {SelectedMean.Value.ToString()}]";
+
         //Commands
         private RelayCommand? _cmdAddGrade;
         public RelayCommand CmdAddGrade
         {
             get
             {
-                return _cmdAddGrade ?? (_cmdAddGrade = new RelayCommand(
+                return _cmdAddGrade ??= new RelayCommand(
                     () =>
                     {
+                        if (SelectedMean != null)
+                        {
+                            MessageBox.Show("Materia are deja media incheiata");
+                            return;
+                        }
+
                         if (FieldSht == null)
                         {
                             MessageBox.Show("Nu exista clasa selectata");
@@ -206,8 +240,8 @@ namespace SchoolManagement.ViewModels
 
                         UpdateListOfGrades();
                     }
-                , () => true
-                ));
+                    , () => true
+                );
             }
         }
 
@@ -216,17 +250,76 @@ namespace SchoolManagement.ViewModels
         {
             get
             {
-                return _cmdDeleteGrade ?? (_cmdDeleteGrade = new RelayCommand(
+                return _cmdDeleteGrade ??= new RelayCommand(
                     () =>
                     {
+                        if (SelectedMean != null)
+                        {
+                            MessageBox.Show("Materia are deja media incheiata");
+                            return;
+                        }
+
                         if (SelectedGrade == null)
                             return;
 
                         GradeBLL.RemoveGrade(SelectedGrade);
                         UpdateListOfGrades();
                     }
-                , () => true
-                ));
+                    , () => true
+                );
+            }
+        }
+
+        private RelayCommand? _cmdCloseMean;
+        public RelayCommand CmdCloseMean
+        {
+            get
+            {
+                return _cmdCloseMean ??= new RelayCommand(
+                    () =>
+                    {
+                        if (SelectedMean != null)
+                        {
+                            MessageBox.Show("Materia are deja media incheiata");
+                            return;
+                        }
+
+                        if (FieldSht == null)
+                        {
+                            MessageBox.Show("Alegeti o clasa");
+                            return;
+                        }
+
+                        if (FieldStudent == null)
+                        {
+                            MessageBox.Show("Alegeti un elev");
+                            return;
+                        }
+
+                        if (Grades.Count < 3)
+                        {
+                            MessageBox.Show("Numar insuficient de note");
+                            return;
+                        }
+
+                        if (FieldSht.HasThesis && !Grades.Any(g => g.IsThesis))
+                        {
+                            MessageBox.Show("Aceasta materie necesita teza");
+                            return;
+                        }
+
+                        Mean newMean = new Mean()
+                        {
+                            Semester = FieldSemester,
+                            Sht = FieldSht,
+                            Student = FieldStudent
+                        };
+
+                        MeanBLL.ComputeAndAddMean(newMean);
+                        UpdateMean();
+                    }
+                    , () => true
+                );
             }
         }
 
@@ -236,7 +329,7 @@ namespace SchoolManagement.ViewModels
         {
             get
             {
-                return _cmdAddAbsence ?? (_cmdAddAbsence = new RelayCommand(
+                return _cmdAddAbsence ??= new RelayCommand(
                     () =>
                     {
                         if (FieldSht == null)
@@ -266,8 +359,8 @@ namespace SchoolManagement.ViewModels
 
                         UpdateListOfAbsences();
                     }
-                , () => true
-                ));
+                    , () => true
+                );
             }
         }
 
@@ -276,7 +369,7 @@ namespace SchoolManagement.ViewModels
         {
             get
             {
-                return _cmdDeleteAbsence ?? (_cmdDeleteAbsence = new RelayCommand(
+                return _cmdDeleteAbsence ??= new RelayCommand(
                     () =>
                     {
                         if (SelectedAbsence == null)
@@ -285,8 +378,8 @@ namespace SchoolManagement.ViewModels
                         AbsenceBLL.RemoveAbsence(SelectedAbsence);
                         UpdateListOfAbsences();
                     }
-                , () => true
-                ));
+                    , () => true
+                );
             }
         }
     }
