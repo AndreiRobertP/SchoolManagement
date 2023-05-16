@@ -12,7 +12,6 @@
     <Grid Background="white" Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -22,58 +21,88 @@
         </Grid.ColumnDefinitions>
 
         <!-- Alegere elev -->
-        <DataGrid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5">
+        <DataGrid Grid.Row="0" Grid.Column="0" Margin="5">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nr" Width="auto"/>
                 <DataGridTextColumn Header="Nume elev" Width="*"/>
-                <DataGridTextColumn Header="Medie" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <!-- Alegere meterie -->
-        <DataGrid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="5">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Materie" Width="*"/>
-                <DataGridTextColumn Header="Medie" Width="auto"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="0" Grid.Column="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
+            <DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Materie" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
 
+            <WrapPanel Grid.Row="1" Orientation="Vertical">
+                <Label Content="STATISTICI GENERALE" FontWeight="Bold"></Label>
+                <Label Content="Medie sem I:"></Label>
+                <Label Content="Medie sem II:"></Label>
+                <Label Content="Medie generala :"></Label>
+            </WrapPanel>
+        </Grid>
 
-        <!-- Note -->
-        <DataGrid Grid.Row="0" Grid.Column="2" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nr" Width="auto"/>
-                <DataGridTextColumn Header="Nota" Width="*"/>
-                <DataGridTextColumn Header="Data" Width="*"/>
-                <DataGridTextColumn Header="Teza" Width="auto"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <!-- Absente -->
-        <Grid Margin="5" Grid.Column="2" Grid.Row="1">
+        <Grid Grid.Row="0" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <!-- Semestru -->
+            <WrapPanel Background="#e5e5e5" Grid.Row="0" Margin="5">
+                <RadioButton Content="Sem I" GroupName="Semester"/>
+                <RadioButton Content="Sem II" GroupName="Semester" IsChecked="{Binding FieldSemesterBinary}"/>
+            </WrapPanel>
 
-            <Menu Grid.Row="0">
-                <Button Content="Motiveaza"></Button>
-            </Menu>
+            <!-- Note -->
+            <Grid Margin="5" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nr" Width="auto"/>
-                    <DataGridTextColumn Header="Data" Width="*"/>
-                    <DataGridTextColumn Header="Status" Width="auto"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Grades}" SelectedItem="{Binding SelectedGrade}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nota" Width="*" Binding="{Binding Value}"/>
+                        <DataGridTextColumn Header="Data" Width="*" Binding="{Binding GivenDate}"/>
+                        <DataGridTextColumn Header="Teza" Width="auto" Binding="{Binding IsThesis}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!-- Absente -->
+            <Grid Margin="5" Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <WrapPanel Background="#ced4da" Grid.Row="0">
+                    <Button Content="Motiveaza" Command="{Binding CmdDeleteAbsence}"></Button>
+                    <CheckBox Content="Vezi doar nemotivate" VerticalAlignment="Center"></CheckBox>
+                </WrapPanel>
+
+                <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Absences}" SelectedItem="{Binding SelectedAbsence}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Data" Width="*" Binding="{Binding GivenDate}"/>
+                        <DataGridTextColumn Header="Nemotivat" Width="*" Binding="{Binding IsActive}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
 
+
         <!-- Status -->
-        <Menu IsEnabled="False" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" >
-            <Label>Status : Neincheiat [se poate incheia]</Label>
-            <Label>Medie: 8.50</Label>
-        </Menu>
+        <WrapPanel  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
+            <Label Content="STATISTICI MATERIE" FontWeight="Bold" Margin="0,0,10,0"></Label>
+            <Label>Semestru I:</Label>
+            <Label>Semestru II:</Label>
+        </WrapPanel>
     </Grid>
 </Page>

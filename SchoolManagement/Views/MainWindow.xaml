@@ -26,8 +26,8 @@
                 <MenuItem Header="Fisiere" Name="MniTeacherFile" Click="MniTeacherFile_Click"/>
             </MenuItem>
             <MenuItem Name="MnuHomeroomTeacher" Header="Diriginte" Visibility="Collapsed">
-                <MenuItem Header="Catalog clasa"></MenuItem>
-                <MenuItem Header="Statistici"></MenuItem>
+                <MenuItem Header="Catalog clasa" Name="MniHomeroomTeacherCatalog" Click="MniHomeroomTeacherCatalog_OnClick"></MenuItem>
+                <MenuItem Header="StatisticiHomeroomTeacherStats" Click="MenuItem_OnClick"></MenuItem>
             </MenuItem>
 
             <MenuItem Name="MnuStudent" Header="Elev" Visibility="Collapsed"/>

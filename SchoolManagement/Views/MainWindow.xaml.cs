@@ -105,7 +105,18 @@ namespace SchoolManagement
 
         private void MniTeacherFile_Click(object sender, RoutedEventArgs e)
         {
-            frmMain.Content= new TeacherFileView();
+            frmMain.Content = new TeacherFileView();
+        }
+
+        private void MniHomeroomTeacherCatalog_OnClick(object sender, RoutedEventArgs e)
+        {
+            frmMain.Content = new HomeroomTeacherCatalogView();
+        }
+
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            //frmMain.Content = new HomeroomTeacherCatalogView();
         }
     }
 }
