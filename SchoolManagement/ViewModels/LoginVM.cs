@@ -16,16 +16,16 @@ namespace SchoolManagement.ViewModels
         public String DisplayPassword { get; set; }
 
 
-        private UserPermisions _userPermisions;
-        public UserPermisions UserPermisions
+        private UserLoginResponse _userLoginResponse;
+        public UserLoginResponse UserLoginResponse
         {
             get {
-                return _userPermisions ?? new UserPermisions();
+                return _userLoginResponse ?? new UserLoginResponse();
             }
             
             set
             {
-                _userPermisions = value;
+                _userLoginResponse = value;
                 OnPropertyChanged();
             }
         }
@@ -42,9 +42,9 @@ namespace SchoolManagement.ViewModels
                 return _cmdLogin ?? (_cmdLogin = new RelayCommand(
                     () =>
                     {
-                        UserPermisions = UserBLL.GetUserTypeLogin(DisplayUsername);
+                        UserLoginResponse = UserBLL.GetUserTypeLogin(DisplayUsername);
 
-                        if (!UserPermisions.IsRegistered)
+                        if (!UserLoginResponse.IsRegistered)
                         {
                             MessageBox.Show("The username entered doesn't exist in the database", "Wrong credentials", MessageBoxButton.OK, MessageBoxImage.Error);
                         }

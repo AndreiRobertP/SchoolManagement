@@ -1,26 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SchoolManagement.Models.DataAccess;
+﻿using SchoolManagement.Models.DataAccess;
 using SchoolManagement.Models.EntityLayer;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SchoolManagement.Models.BusinessLogic
 {
-    public class UserPermisions
+    public class UserLoginResponse
     {
-        public bool IsAdmin { get; set; } = false;
-        public bool IsTeacher { get; set; } = false;
-        public bool IsHomeroomTeacher { get; set; } = false;
-        public bool IsStudent { get; set; } = false;
+        public bool IsAdmin => Admin != null;
+        public bool IsTeacher => Teacher != null;
+        public bool IsHomeroomTeacher => Homeroom != null;
+        public bool IsStudent => Student != null;
         public bool IsRegistered => IsAdmin || IsTeacher || IsStudent;
+
+        public Admin? Admin { get; set; } = null;
+        public Teacher? Teacher { get; set; } = null;
+        public Homeroom? Homeroom { get; set; } = null;
+        public Student? Student { get; set; } = null;
     }
 
     public class UserBLL
     {
-        public UserPermisions GetUserTypeLogin(string username)
+        public UserLoginResponse GetUserTypeLogin(string username)
         {
 
             using (var context = new SchoolManagementContext())
@@ -29,14 +31,21 @@ namespace SchoolManagement.Models.BusinessLogic
 
                 var teacherResponse = context.Teachers.Where(t => t.Username == username && t.IsActive == true).ToArray<Teacher>();
 
+                Homeroom[] homeroomResponse = Array.Empty<Homeroom>();
+                if (teacherResponse.Length > 0)
+                {
+                    Teacher teacher = teacherResponse[0];
+                    homeroomResponse = context.Homerooms.Where(h=>h.Teacher==teacher).ToArray();
+                }
+
                 var studentResponse = context.Students.Where(s => s.Username == username && s.IsActive == true).ToArray<Student>();
 
-                return new UserPermisions
+                return new UserLoginResponse
                 {
-                    IsAdmin = adminResponse.Length > 0,
-                    IsTeacher = teacherResponse.Length > 0,
-                    IsHomeroomTeacher = teacherResponse.Length > 0, //TODO FIXME
-                    IsStudent = studentResponse.Length > 0
+                    Admin = adminResponse.Length == 1 ? adminResponse[0] : null,
+                    Teacher = teacherResponse.Length == 1? teacherResponse[0] : null,
+                    Homeroom = homeroomResponse.Length >= 1? homeroomResponse[0] : null,
+                    Student = studentResponse.Length == 1? studentResponse[0] : null
                 };
             }
         }

@@ -31,15 +31,16 @@ namespace SchoolManagement
 
         void OnLoginChange(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(LoginVM.UserPermisions))
+            if (e.PropertyName == nameof(LoginVM.UserLoginResponse))
             {
-                UserPermisions userPermisions = LoginVM.UserPermisions;
+                UserLoginResponse userLoginResponse = LoginVM.UserLoginResponse;
+                MainWindowViewModel.UserLoginResponse = userLoginResponse;
 
-                SetVisibilityMenuRoles(userPermisions.IsRegistered);
-                SetVisibilityAdmin(userPermisions.IsAdmin);
-                SetVisibilityTeacher(userPermisions.IsTeacher);
-                SetVisibilityHomeroomTeacher(userPermisions.IsHomeroomTeacher);
-                SetVisibilityStudent(userPermisions.IsStudent);
+                SetVisibilityMenuRoles(userLoginResponse.IsRegistered);
+                SetVisibilityAdmin(userLoginResponse.IsAdmin);
+                SetVisibilityTeacher(userLoginResponse.IsTeacher);
+                SetVisibilityHomeroomTeacher(userLoginResponse.IsHomeroomTeacher);
+                SetVisibilityStudent(userLoginResponse.IsStudent);
             }
         }
 
