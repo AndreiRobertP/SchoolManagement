@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SchoolManagement.Models.BusinessLogic;
+﻿using SchoolManagement.Models.BusinessLogic;
 
 namespace SchoolManagement.ViewModels
 {

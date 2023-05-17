@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SchoolManagement.ViewModels;
-using System;
+﻿using SchoolManagement.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagement.Models.EntityLayer

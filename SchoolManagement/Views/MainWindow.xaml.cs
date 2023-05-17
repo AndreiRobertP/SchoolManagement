@@ -1,8 +1,6 @@
 ﻿using SchoolManagement.Models.BusinessLogic;
 using SchoolManagement.ViewModels;
 using SchoolManagement.Views;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 

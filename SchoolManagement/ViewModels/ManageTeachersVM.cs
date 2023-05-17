@@ -1,5 +1,4 @@
-﻿using Azure.Identity;
-using SchoolManagement.Models.BusinessLogic;
+﻿using SchoolManagement.Models.BusinessLogic;
 using SchoolManagement.Models.EntityLayer;
 using System.Collections.ObjectModel;
 using System.Windows;

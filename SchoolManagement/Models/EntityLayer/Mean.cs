@@ -1,5 +1,4 @@
 ﻿using SchoolManagement.ViewModels;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagement.Models.EntityLayer

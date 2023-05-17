@@ -1,11 +1,5 @@
-﻿using Microsoft.Identity.Client;
-using SchoolManagement.Models.BusinessLogic;
+﻿using SchoolManagement.Models.BusinessLogic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SchoolManagement.ViewModels

@@ -1,11 +1,7 @@
 ﻿using SchoolManagement.Models.BusinessLogic;
 using SchoolManagement.Models.EntityLayer;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.ViewModels
 {
@@ -28,7 +24,7 @@ namespace SchoolManagement.ViewModels
         public AbsenceBLL AbsenceBLL { get; set; } = new AbsenceBLL();
         public StudentBLL StudentBLL { get; set; } = new StudentBLL();
 
-        public ObservableCollection<ExpelableStudent> Students { get; set; } = new ObservableCollection<ExpelableStudent>();
+        public ObservableCollection<ExpelableStudent> ExpelableStudents { get; set; } = new ObservableCollection<ExpelableStudent>();
         public int TotalAbsencesThreshold { get; } = 50;
 
         private Homeroom _fieldHomeroom = null!;
@@ -67,7 +63,7 @@ namespace SchoolManagement.ViewModels
 
         public void UpdateStudents()
         {
-            Students.Clear();
+            ExpelableStudents.Clear();
 
             if (FieldHomeroom == null)
                 return;
@@ -80,7 +76,7 @@ namespace SchoolManagement.ViewModels
                 int notMotivated = absences.Count(a => a.IsActive);
 
                 if (total > TotalAbsencesThreshold)
-                    Students.Add(new ExpelableStudent(student, total, notMotivated));
+                    ExpelableStudents.Add(new ExpelableStudent(student, total, notMotivated));
             }
         }
     }
