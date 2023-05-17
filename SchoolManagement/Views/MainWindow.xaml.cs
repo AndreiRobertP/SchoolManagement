@@ -116,13 +116,16 @@ namespace SchoolManagement
 
         private void MniHomeroomTeacherCatalog_OnClick(object sender, RoutedEventArgs e)
         {
-            frmMain.Content = new HomeroomTeacherCatalogView();
+            HomeroomTeacherCatalogView htcv = new HomeroomTeacherCatalogView();
+            htcv.HomeroomTeacherCatalogVM.FieldHomeroom = MainWindowViewModel.UserLoginResponse.Homeroom;
+            frmMain.Content = htcv;
         }
 
-
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        private void MniHomeroomTeacherExpelList_OnClick(object sender, RoutedEventArgs e)
         {
-            //frmMain.Content = new HomeroomTeacherCatalogView();
+            ExpelListView htcv = new ExpelListView();
+            htcv.ExpelListVm.FieldHomeroom = MainWindowViewModel.UserLoginResponse.Homeroom;
+            frmMain.Content = htcv;
         }
     }
 }

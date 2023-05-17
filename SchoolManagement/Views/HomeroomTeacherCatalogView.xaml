@@ -4,10 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SchoolManagement.Views"
+      xmlns:viewModels="clr-namespace:SchoolManagement.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomeroomTeacherCatalogView">
 
+    <Page.DataContext>
+        <viewModels:HomeroomTeacherCatalogVM/>
+    </Page.DataContext>
 
     <Grid Background="white" Margin="5">
         <Grid.RowDefinitions>
@@ -21,9 +25,9 @@
         </Grid.ColumnDefinitions>
 
         <!-- Alegere elev -->
-        <DataGrid Grid.Row="0" Grid.Column="0" Margin="5">
+        <DataGrid Grid.Row="0" Grid.Column="0" Margin="5" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Students}" SelectedItem="{Binding FieldStudent}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nume elev" Width="*"/>
+                <DataGridTextColumn Header="Nume elev" Width="*" Binding="{Binding Name}" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -34,17 +38,23 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <DataGrid>
+            <DataGrid IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Shts}" SelectedItem="{Binding FieldSht}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Materie" Width="*"/>
+                    <DataGridTextColumn Header="Materie" Width="*" Binding="{Binding Subject.NameSubject}"/>
+                    <DataGridTextColumn Header="Profesor" Width="*" Binding="{Binding Teacher.Name}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <WrapPanel Grid.Row="1" Orientation="Vertical">
-                <Label Content="STATISTICI GENERALE" FontWeight="Bold"></Label>
-                <Label Content="Medie sem I:"></Label>
-                <Label Content="Medie sem II:"></Label>
-                <Label Content="Medie generala :"></Label>
+            <WrapPanel Grid.Row="1" Orientation="Vertical" Background="#ced4da" Margin="0,5">
+                <Label Content="STATISTICI MATERIE" FontWeight="Bold"></Label>
+                <WrapPanel>
+                    <Label FontWeight="DemiBold" Content="Sem I:"></Label>
+                    <Label Content="{Binding StatsShtSemI}"></Label>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label FontWeight="DemiBold" Content="Sem II:"></Label>
+                    <Label Content="{Binding StatsShtSemII}"></Label>
+                </WrapPanel>
             </WrapPanel>
         </Grid>
 
@@ -85,10 +95,10 @@
 
                 <WrapPanel Background="#ced4da" Grid.Row="0">
                     <Button Content="Motiveaza" Command="{Binding CmdDeleteAbsence}"></Button>
-                    <CheckBox Content="Vezi doar nemotivate" VerticalAlignment="Center"></CheckBox>
+                    <CheckBox Content="Vezi toate" VerticalAlignment="Center" IsChecked="{Binding FieldViewAllAbsences}"></CheckBox>
                 </WrapPanel>
 
-                <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Absences}" SelectedItem="{Binding SelectedAbsence}">
+                <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding ViewedAbsences}" SelectedItem="{Binding SelectedAbsence}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Data" Width="*" Binding="{Binding GivenDate}"/>
                         <DataGridTextColumn Header="Nemotivat" Width="*" Binding="{Binding IsActive}"/>
@@ -99,10 +109,16 @@
 
 
         <!-- Status -->
-        <WrapPanel  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
-            <Label Content="STATISTICI MATERIE" FontWeight="Bold" Margin="0,0,10,0"></Label>
-            <Label>Semestru I:</Label>
-            <Label>Semestru II:</Label>
+        <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#e5e5e5">
+            <Label Content="STATISTICI GENERALE" FontWeight="Bold" Margin="0,0,10,0"></Label>
+            <Label FontWeight="SemiBold">Semestru I:</Label>
+            <Label Content="{Binding StatsGeneralSemI}"/>
+            <Label Margin="5,0">|</Label>
+            <Label FontWeight="SemiBold">Semestru II:</Label>
+            <Label Content="{Binding StatsGeneralSemII}"/>
+            <Label Margin="5,0">|</Label>
+            <Label FontWeight="SemiBold">Anual:</Label>
+            <Label Content="{Binding StatsGeneralYear}"/>
         </WrapPanel>
     </Grid>
 </Page>

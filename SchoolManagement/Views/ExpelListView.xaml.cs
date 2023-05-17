@@ -17,17 +17,17 @@ using SchoolManagement.ViewModels;
 namespace SchoolManagement.Views
 {
     /// <summary>
-    /// Interaction logic for HomeroomTeacherCatalogView.xaml
+    /// Interaction logic for ExpelListView.xaml
     /// </summary>
-    public partial class HomeroomTeacherCatalogView : Page
+    public partial class ExpelListView : Page
     {
-        public HomeroomTeacherCatalogVM HomeroomTeacherCatalogVM { get; set; }
+        public ExpelListVM ExpelListVm { get; set; }
 
-        public HomeroomTeacherCatalogView()
+        public ExpelListView()
         {
             InitializeComponent();
 
-            HomeroomTeacherCatalogVM = DataContext as HomeroomTeacherCatalogVM;
+            ExpelListVm = DataContext as ExpelListVM;
         }
     }
 }

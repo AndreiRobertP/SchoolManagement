@@ -94,10 +94,23 @@ namespace SchoolManagement.Models.BusinessLogic
             ObservableCollection<Mean> collection = new ObservableCollection<Mean>();
             using (var context = new SchoolManagementContext())
             {
-                var Means = context.Means.Where(f => f.Sht.ShtId == sht.ShtId && f.Student.StudentId == student.StudentId && f.Semester == semester).Include(g => g.Student).Include(g => g.Sht).ToList();
+                var means = context.Means.Where(f => f.Sht.ShtId == sht.ShtId && f.Student.StudentId == student.StudentId && f.Semester == semester).Include(g => g.Student).Include(g => g.Sht).ToList();
 
-                foreach (var Mean in Means)
-                    collection.Add(Mean);
+                foreach (var mean in means)
+                    collection.Add(mean);
+            }
+            return collection;
+        }
+
+        public ObservableCollection<Mean> GetMeansByStudent(Student student)
+        {
+            ObservableCollection<Mean> collection = new ObservableCollection<Mean>();
+            using (var context = new SchoolManagementContext())
+            {
+                var means = context.Means.Where(f => f.Student.StudentId == student.StudentId).Include(g => g.Student).Include(g => g.Sht).ToList();
+
+                foreach (var mean in means)
+                    collection.Add(mean);
             }
             return collection;
         }

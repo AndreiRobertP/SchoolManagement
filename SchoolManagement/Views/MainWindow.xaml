@@ -27,7 +27,8 @@
             </MenuItem>
             <MenuItem Name="MnuHomeroomTeacher" Header="Diriginte" Visibility="Collapsed">
                 <MenuItem Header="Catalog clasa" Name="MniHomeroomTeacherCatalog" Click="MniHomeroomTeacherCatalog_OnClick"></MenuItem>
-                <MenuItem Header="StatisticiHomeroomTeacherStats" Click="MenuItem_OnClick"></MenuItem>
+                <MenuItem Header="Statistici" Name="MniHomeroomTeacherStats"></MenuItem>
+                <MenuItem Header="Situatie exmatriculare" Name="MniHomeroomTeacherExpelList" Click="MniHomeroomTeacherExpelList_OnClick"></MenuItem>
             </MenuItem>
 
             <MenuItem Name="MnuStudent" Header="Elev" Visibility="Collapsed"/>

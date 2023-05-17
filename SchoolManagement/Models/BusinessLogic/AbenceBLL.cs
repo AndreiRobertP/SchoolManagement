@@ -68,5 +68,18 @@ namespace SchoolManagement.Models.BusinessLogic
             }
             return collection;
         }
+
+        public ObservableCollection<Absence> GetAbsencesStudentAndSemester(Student student, int semester)
+        {
+            ObservableCollection<Absence> collection = new ObservableCollection<Absence>();
+            using (var context = new SchoolManagementContext())
+            {
+                var Absences = context.Absences.Where(f => f.Student.StudentId == student.StudentId && f.Semester == semester).Include(g => g.Student).Include(g => g.Sht).ToList();
+
+                foreach (var Absence in Absences)
+                    collection.Add(Absence);
+            }
+            return collection;
+        }
     }
 }

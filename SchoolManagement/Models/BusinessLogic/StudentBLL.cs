@@ -60,10 +60,15 @@ namespace SchoolManagement.Models.BusinessLogic
 
         public ObservableCollection<Student> GetStudentsBySht(Sht sht)
         {
+            return GetStudentsByHomeroom(sht.Homeroom);
+        }
+
+        public ObservableCollection<Student> GetStudentsByHomeroom(Homeroom homeroom)
+        {
             ObservableCollection<Student> collection = new ObservableCollection<Student>();
             using (var context = new SchoolManagementContext())
             {
-                var Students = context.Students.Where(t => t.IsActive && t.Homeroom.HomeroomId == sht.Homeroom.HomeroomId).Include(t => t.Homeroom).ToList();
+                var Students = context.Students.Where(t => t.IsActive && t.Homeroom.HomeroomId == homeroom.HomeroomId).Include(t => t.Homeroom).ToList();
 
                 foreach (var Student in Students)
                     collection.Add(Student);
