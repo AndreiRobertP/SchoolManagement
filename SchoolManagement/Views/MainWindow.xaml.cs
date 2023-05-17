@@ -125,5 +125,19 @@ namespace SchoolManagement
             htcv.ExpelListVm.FieldHomeroom = MainWindowViewModel.UserLoginResponse.Homeroom;
             frmMain.Content = htcv;
         }
+
+        private void MniStudentCatalog_OnClick(object sender, RoutedEventArgs e)
+        {
+            StudentCatalogView scv = new StudentCatalogView();
+            scv.StudentCatalogVM.FieldStudent = MainWindowViewModel.UserLoginResponse.Student;
+            frmMain.Content = scv;
+        }
+
+        private void MniStudentFiles_OnClick(object sender, RoutedEventArgs e)
+        {
+            StudentFileView sfv = new StudentFileView();
+            sfv.StudentFileVM.FieldStudent = MainWindowViewModel.UserLoginResponse.Student;
+            frmMain.Content = sfv;
+        }
     }
 }

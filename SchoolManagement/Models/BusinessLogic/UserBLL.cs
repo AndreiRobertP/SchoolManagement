@@ -2,6 +2,7 @@
 using SchoolManagement.Models.EntityLayer;
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace SchoolManagement.Models.BusinessLogic
@@ -38,7 +39,7 @@ namespace SchoolManagement.Models.BusinessLogic
                     homeroomResponse = context.Homerooms.Where(h=>h.Teacher==teacher).ToArray();
                 }
 
-                var studentResponse = context.Students.Where(s => s.Username == username && s.IsActive == true).ToArray<Student>();
+                var studentResponse = context.Students.Where(s => s.Username == username && s.IsActive == true).Include(s=> s.Homeroom).ToArray<Student>();
 
                 return new UserLoginResponse
                 {

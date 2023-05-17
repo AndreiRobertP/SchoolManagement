@@ -55,5 +55,18 @@ namespace SchoolManagement.Models.BusinessLogic
                 context.SaveChanges();
             }
         }
+
+        public Homeroom GetHomeroomsByStudent(Student student)
+        {
+            using (var context = new SchoolManagementContext())
+            {
+                var homerooms = context.Homerooms.Where(t => t.IsActive && t.HomeroomId == student.Homeroom.HomeroomId).Include(h => h.Teacher)
+                    .Include(h => h.Specialization).ToList();
+
+                if (homerooms.Count != 1)
+                    return null;
+                return homerooms[0];
+            }
+        }
     }
 }
