@@ -270,7 +270,7 @@ namespace SchoolManagement.ViewModels
         {
             foreach (var sht in Shts)
             {
-                if (!MeansStudent.Any(m => m.Sht.ShtId == sht.ShtId && m.Semester == 1))
+                if (!MeansStudent.Any(m => m.Sht.ShtId == sht.ShtId && m.Semester == semester))
                     return false;
             }
 
@@ -300,7 +300,7 @@ namespace SchoolManagement.ViewModels
                 if (FieldStudent == null)
                     return "[Student neselectat]";
 
-                if (!AreAllShtsClosedSemester(1))
+                if (!AreAllShtsClosedSemester(2))
                     return "[Materii neincheiate]";
 
                 double semII = MeansStudent.Where(m => m.Semester == 2).Average(m => m.Value);
@@ -317,6 +317,9 @@ namespace SchoolManagement.ViewModels
                     return "[Student neselectat]";
 
                 if (!AreAllShtsClosedSemester(1))
+                    return "[Materii neincheiate]";
+
+                if (!AreAllShtsClosedSemester(2))
                     return "[Materii neincheiate]";
 
                 double semI = MeansStudent.Where(m => m.Semester == 1).Average(m => m.Value);

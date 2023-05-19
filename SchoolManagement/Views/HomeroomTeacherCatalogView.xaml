@@ -77,7 +77,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Grades}" SelectedItem="{Binding SelectedGrade}">
+                <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Grades}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nota" Width="*" Binding="{Binding Value}"/>
                         <DataGridTextColumn Header="Data" Width="*" Binding="{Binding GivenDate}"/>

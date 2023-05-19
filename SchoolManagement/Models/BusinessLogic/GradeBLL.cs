@@ -37,7 +37,7 @@ namespace SchoolManagement.Models.BusinessLogic
                 {
                     var thesis = context.Grades.Where(g =>
                         g.IsActive && g.IsThesis && g.Semester == newGrade.Semester &&
-                        g.Sht.ShtId == newGrade.Sht.ShtId).Count();
+                        g.Sht.ShtId == newGrade.Sht.ShtId && g.Student.StudentId == newGrade.Student.StudentId).Count();
 
                     if (thesis > 0)
                         throw new Exception("There is already an existing thesis");

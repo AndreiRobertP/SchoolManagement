@@ -1,5 +1,7 @@
-﻿using SchoolManagement.ViewModels;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolManagement.ViewModels;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 
 namespace SchoolManagement.Models.EntityLayer
 {

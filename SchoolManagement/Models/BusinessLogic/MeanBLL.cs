@@ -60,18 +60,22 @@ namespace SchoolManagement.Models.BusinessLogic
 
                 //Separate non-thesis grades and compute avg
                 var nonThesisGrades = grades.Where(g => !g.IsThesis);
-                double average = nonThesisGrades.Average(g => g.Value);
 
+                int average;
                 //If we have thesis
                 if (thesis.Count() == 1)
                 {
-                    var thesisValue = thesis.Single().Value;
-                    average = average * 0.75 + thesisValue * 0.25;
+                    var thesisValue = thesis.Single();
+                    average = Grade.ComputeMeanWithThesis(thesisValue, nonThesisGrades.ToArray());
+                }
+                //If we don't have thesis
+                else
+                {
+                    average = Grade.ComputeMeanWithoutThesis(nonThesisGrades.ToArray());
                 }
 
-                average = ((int)average * 100) / 100d;
 
-                newMean.Value = (float)average;
+                newMean.Value = average;
                 context.Means.Add(newMean);
                 context.SaveChanges();
             }

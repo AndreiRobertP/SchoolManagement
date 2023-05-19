@@ -1,6 +1,8 @@
 ﻿using SchoolManagement.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace SchoolManagement.Models.EntityLayer
 {
@@ -38,6 +40,21 @@ namespace SchoolManagement.Models.EntityLayer
             if (IsThesis && !Sht.HasThesis) return false;
 
             return true;
+        }
+
+        public static int ComputeMeanWithoutThesis(Grade[] grades)
+        {
+            double avg = grades.Average(g => g.Value);
+            return (int) Math.Round(avg, 0, MidpointRounding.AwayFromZero);
+        }
+
+        public static int ComputeMeanWithThesis(Grade thesis, Grade[] grades)
+        {
+            double avg = grades.Average(g => g.Value);
+            avg = Math.Round(avg, 2, MidpointRounding.AwayFromZero);
+
+            double avgWithThesis = 0.75 * avg + 0.25 * thesis.Value;
+            return (int)Math.Round(avgWithThesis, 0, MidpointRounding.AwayFromZero);
         }
     }
 }
