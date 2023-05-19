@@ -119,6 +119,13 @@ namespace SchoolManagement
             frmMain.Content = htcv;
         }
 
+        private void MniHomeroomTeacherStats_OnClick(object sender, RoutedEventArgs e)
+        {
+            HomeroomTeacherStatsView htsv = new HomeroomTeacherStatsView();
+            htsv.HomeroomTeacherStatsVM.FieldHomeroom = MainWindowViewModel.UserLoginResponse.Homeroom;
+            frmMain.Content = htsv;
+        }
+
         private void MniHomeroomTeacherExpelList_OnClick(object sender, RoutedEventArgs e)
         {
             ExpelListView htcv = new ExpelListView();

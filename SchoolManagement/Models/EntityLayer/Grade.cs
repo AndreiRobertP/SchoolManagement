@@ -51,7 +51,7 @@ namespace SchoolManagement.Models.EntityLayer
         public static int ComputeMeanWithThesis(Grade thesis, Grade[] grades)
         {
             double avg = grades.Average(g => g.Value);
-            avg = Math.Round(avg, 2, MidpointRounding.AwayFromZero);
+            avg = Math.Round(avg, 2, MidpointRounding.ToZero);
 
             double avgWithThesis = 0.75 * avg + 0.25 * thesis.Value;
             return (int)Math.Round(avgWithThesis, 0, MidpointRounding.AwayFromZero);

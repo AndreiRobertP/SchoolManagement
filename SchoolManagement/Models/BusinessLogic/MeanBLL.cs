@@ -27,7 +27,7 @@ namespace SchoolManagement.Models.BusinessLogic
             using (var context = new SchoolManagementContext())
             {
                 //Make sure mean isn't already closed
-                if (GetMeansByShtAndStudentAndSemester(newMean.Sht, newMean.Student, newMean.Semester).Any())
+                if (GetMeanByShtAndStudentAndSemester(newMean.Sht, newMean.Student, newMean.Semester) != null)
                 {
                     throw new Exception("Media este deja incheiata");
                 }
@@ -90,17 +90,17 @@ namespace SchoolManagement.Models.BusinessLogic
             }
         }
 
-        public ObservableCollection<Mean> GetMeansByShtAndStudentAndSemester(Sht sht, Student student, int semester)
+        public Mean? GetMeanByShtAndStudentAndSemester(Sht sht, Student student, int semester)
         {
-            ObservableCollection<Mean> collection = new ObservableCollection<Mean>();
             using (var context = new SchoolManagementContext())
             {
                 var means = context.Means.Where(f => f.Sht.ShtId == sht.ShtId && f.Student.StudentId == student.StudentId && f.Semester == semester).Include(g => g.Student).Include(g => g.Sht).ToList();
 
-                foreach (var mean in means)
-                    collection.Add(mean);
+                if (means.Count == 0)
+                    return null;
+
+                return means[0];
             }
-            return collection;
         }
 
         public ObservableCollection<Mean> GetMeansByStudent(Student student)

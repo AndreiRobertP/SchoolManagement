@@ -1,5 +1,7 @@
-﻿using SchoolManagement.ViewModels;
+﻿using System;
+using SchoolManagement.ViewModels;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace SchoolManagement.Models.EntityLayer
 {
@@ -27,6 +29,17 @@ namespace SchoolManagement.Models.EntityLayer
             if (Student == null) return false;
 
             return true;
+        }
+
+        public static double ComputeYearlyMeanPerSht(double first, double second)
+        {
+            return Math.Round(first * 0.5 + second * 0.5, 2, MidpointRounding.AwayFromZero);
+        }
+
+        public static double ComputeGeneralMean(double[] yearlyMeansPerSht)
+        {
+            double avg = yearlyMeansPerSht.Average();
+            return Math.Round(avg, 2, MidpointRounding.ToZero);
         }
     }
 }

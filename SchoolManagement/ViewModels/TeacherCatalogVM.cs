@@ -182,9 +182,7 @@ namespace SchoolManagement.ViewModels
             if (FieldStudent == null)
                 return;
 
-            var tmp = MeanBLL.GetMeansByShtAndStudentAndSemester(FieldSht, FieldStudent, FieldSemester);
-
-            SelectedMean = (tmp.Any() ? tmp.Single(): null!);
+            SelectedMean = MeanBLL.GetMeanByShtAndStudentAndSemester(FieldSht, FieldStudent, FieldSemester);
         }
 
         public void UpdateListOfAbsences()
