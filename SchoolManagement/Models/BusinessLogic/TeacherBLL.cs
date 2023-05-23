@@ -24,7 +24,7 @@ namespace SchoolManagement.Models.BusinessLogic
         {
             using (var context = new SchoolManagementContext())
             {
-                context.Teachers.Add(newTeacher);
+                context.InsertTeacher(newTeacher);
                 context.SaveChanges();
             }
         }
@@ -33,7 +33,7 @@ namespace SchoolManagement.Models.BusinessLogic
         {
             using (var context = new SchoolManagementContext())
             {
-                context.Teachers.Update(newTeacher);
+                context.UpdateTeacher(newTeacher);
                 context.SaveChanges();
             }
         }
@@ -44,7 +44,7 @@ namespace SchoolManagement.Models.BusinessLogic
             using (var context = new SchoolManagementContext())
             {
                 deleteTeacher.IsActive = false;
-                context.Teachers.Update(deleteTeacher);
+                context.UpdateTeacher(deleteTeacher);
                 context.SaveChanges();
             }
         }

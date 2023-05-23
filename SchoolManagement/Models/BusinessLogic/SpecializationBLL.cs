@@ -12,7 +12,7 @@ namespace SchoolManagement.Models.BusinessLogic
             ObservableCollection<Specialization> collection = new ObservableCollection<Specialization>();
             using (var context = new SchoolManagementContext())
             {
-                var Specializations = context.Specializations.Where(s => s.IsActive).ToList();
+                var Specializations = context.GetSpecializations().ToList();
 
                 foreach (var Specialization in Specializations)
                     collection.Add(Specialization);
@@ -24,7 +24,7 @@ namespace SchoolManagement.Models.BusinessLogic
         {
             using (var context = new SchoolManagementContext())
             {
-                context.Specializations.Add(newSpecialization);
+                context.InsertSpecialization(newSpecialization);
                 context.SaveChanges();
             }
         }
@@ -33,7 +33,7 @@ namespace SchoolManagement.Models.BusinessLogic
         {
             using (var context = new SchoolManagementContext())
             {
-                context.Specializations.Update(newSpecialization);
+                context.UpdateSpecialization(newSpecialization);
                 context.SaveChanges();
             }
         }
@@ -44,7 +44,7 @@ namespace SchoolManagement.Models.BusinessLogic
             using (var context = new SchoolManagementContext())
             {
                 deleteSpecialization.IsActive = false;
-                context.Specializations.Update(deleteSpecialization);
+                context.UpdateSpecialization(deleteSpecialization);
                 context.SaveChanges();
             }
         }
