@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using SchoolManagement.Models.BusinessLogic;
 using SchoolManagement.Models.EntityLayer;
 
@@ -123,8 +124,16 @@ namespace SchoolManagement.ViewModels
                 return;
             }
 
-            if(SelectedGrade.GradeId == 0)
-                GradeBll.AddGrade(SelectedGrade);
+            try
+            {
+                if (SelectedGrade.GradeId == 0)
+                    GradeBll.AddGrade(SelectedGrade);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Nu s-a putut adauga nota", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
     }
 }

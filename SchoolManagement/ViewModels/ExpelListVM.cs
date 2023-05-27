@@ -25,7 +25,7 @@ namespace SchoolManagement.ViewModels
         public StudentBLL StudentBLL { get; set; } = new StudentBLL();
 
         public ObservableCollection<ExpelableStudent> ExpelableStudents { get; set; } = new ObservableCollection<ExpelableStudent>();
-        public int TotalAbsencesThreshold { get; } = 50;
+        public int TotalAbsencesThreshold { get; } = 20;
 
         private Homeroom _fieldHomeroom = null!;
         public Homeroom FieldHomeroom
@@ -58,7 +58,7 @@ namespace SchoolManagement.ViewModels
         public bool FieldSemesterBinary
         {
             get { return FieldSemester == 2; }
-            set { FieldSemester = (value ? 1 : 0) + 1; }
+            set { FieldSemester = (value ? 2 : 1); }
         }
 
         public void UpdateStudents()

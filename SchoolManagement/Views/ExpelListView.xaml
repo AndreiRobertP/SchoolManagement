@@ -23,13 +23,13 @@
         <Label HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" Grid.Row="0" Content="Elevi in posibilitate de exmatriculare" Margin="10"/>
         <WrapPanel Background="#e5e5e5" Grid.Row="1" Margin="0,5">
             <RadioButton Content="Sem I" GroupName="Semester"/>
-            <RadioButton Content="Sem II" GroupName="Semester" IsChecked="{Binding FieldSemester}"/>
+            <RadioButton Content="Sem II" GroupName="Semester" IsChecked="{Binding FieldSemesterBinary}"/>
         </WrapPanel>
-        <DataGrid Grid.Row="2" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding ExpelableStudents}" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nume" Width="*"/>
-                <DataGridTextColumn Header="Absente nemotivate"/>
-                <DataGridTextColumn Header="Absente motivate"/>
+                <DataGridTextColumn Header="Nume" Width="*" Binding="{Binding Student.Name}"/>
+                <DataGridTextColumn Header="Absente nemotivate" Binding="{Binding NotMotivatedAbsences}"/>
+                <DataGridTextColumn Header="Total absente" Binding="{Binding TotalAbsences}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

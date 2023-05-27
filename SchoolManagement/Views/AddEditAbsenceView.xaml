@@ -33,7 +33,7 @@
         <Label Grid.Row="3" Content="{Binding FieldSubject}"/>
         <Label Grid.Row="4" Content="{Binding FieldSemester}"/>
         <Label Grid.Row="5" Margin="0,10,0,0" Content="Data"/>
-        <DatePicker Grid.Row="6" DisplayDate="{Binding FieldDate}"></DatePicker>
+        <DatePicker Grid.Row="6" SelectedDate="{Binding FieldDate}"></DatePicker>
         <CheckBox Grid.Row="8" Margin="0,5,0,0" Content="Activ" IsChecked="{Binding FieldActive}"/>
         <Button Grid.Row="9" Margin="5,15,5,5" Content="Confirma" Name="BtnConfirm" Click="BtnConfirm_OnClick"/>
     </Grid>

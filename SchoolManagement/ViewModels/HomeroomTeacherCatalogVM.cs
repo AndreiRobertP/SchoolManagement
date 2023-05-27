@@ -116,7 +116,7 @@ namespace SchoolManagement.ViewModels
             set { FieldSemester = (value ? 1 : 0) + 1; }
         }
 
-        private bool _fieldViewAllAbsences = false;
+        private bool _fieldViewAllAbsences = true;
         public bool FieldViewAllAbsences
         {
             get { return _fieldViewAllAbsences; }
@@ -287,6 +287,9 @@ namespace SchoolManagement.ViewModels
                 if (!AreAllShtsClosedSemester(1))
                     return "[Materii neincheiate]";
 
+                if (!MeansStudent.Any())
+                    return "[Nu exista materii incheiate]";
+
                 double semI = MeansStudent.Where(m => m.Semester == 1).Average(m => m.Value);
                 semI = Math.Round(semI, 2, MidpointRounding.AwayFromZero);
                 return semI.ToString();
@@ -302,6 +305,10 @@ namespace SchoolManagement.ViewModels
 
                 if (!AreAllShtsClosedSemester(2))
                     return "[Materii neincheiate]";
+
+
+                if (!MeansStudent.Any())
+                    return "[Nu exista materii incheiate]";
 
                 double semII = MeansStudent.Where(m => m.Semester == 2).Average(m => m.Value);
                 semII = Math.Round(semII, 2, MidpointRounding.AwayFromZero);
@@ -321,6 +328,9 @@ namespace SchoolManagement.ViewModels
 
                 if (!AreAllShtsClosedSemester(2))
                     return "[Materii neincheiate]";
+
+                if (!MeansStudent.Any())
+                    return "[Nu exista materii incheiate]";
 
                 double semI = MeansStudent.Where(m => m.Semester == 1).Average(m => m.Value);
                 semI = Math.Round(semI, 2, MidpointRounding.AwayFromZero);
