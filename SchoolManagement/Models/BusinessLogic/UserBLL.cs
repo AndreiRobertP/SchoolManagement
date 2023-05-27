@@ -28,15 +28,15 @@ namespace SchoolManagement.Models.BusinessLogic
 
             using (var context = new SchoolManagementContext())
             {
-                var adminResponse = context.GetAdminsByUsername(username).ToArray<Admin>();
+                var adminResponse = context.Admins.Where(u=> u.Username == username && u.IsActive).ToArray<Admin>();
 
-                var teacherResponse = context.GetTeachersByUsername(username).ToArray<Teacher>();
+                var teacherResponse = context.Teachers.Where(u => u.Username == username && u.IsActive).ToArray<Teacher>();
 
                 Homeroom[] homeroomResponse = Array.Empty<Homeroom>();
                 if (teacherResponse.Length > 0)
                 {
                     Teacher teacher = teacherResponse[0];
-                    homeroomResponse = context.GetHomeroomsByTeacherUsername(teacher.Username).ToArray();
+                    homeroomResponse = context.Homerooms.Where(h => h.Teacher.Username == username && h.IsActive).ToArray();
                 }
 
                 var studentResponse = context.Students.Where(s => s.Username == username && s.IsActive == true).Include(s=> s.Homeroom).ToArray<Student>();
